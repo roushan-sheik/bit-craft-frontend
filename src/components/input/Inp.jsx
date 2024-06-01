@@ -12,6 +12,7 @@ const Inp = ({
   onChange,
   required,
   boxStyle,
+  accept,
 }) => {
   return (
     <div className={`${boxStyle} flex flex-col gap-2`}>
@@ -27,6 +28,7 @@ const Inp = ({
         required={required}
         name={name}
         id={name}
+        accept={accept}
         className={`rounded-lg border border-gray-300 bg-transparent px-4 py-2 text-[#1B8EF8] focus:outline-none ${inputStyle} `}
         type={type}
       />

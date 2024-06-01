@@ -1,162 +1,177 @@
-import axios from "axios";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import React from "react";
-import { Helmet } from "react-helmet-async";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
+import { TbFidgetSpinner } from "react-icons/tb";
+import { Link, useNavigate } from "react-router-dom";
+import { imageUpload } from "../../api/utils";
+import Btn from "../../components/button/Btn";
 import Inp from "../../components/input/Inp";
 import useUserContext from "../../hooks/useUserContext";
-import auth from "../../services/firebase";
-import Btn from "./../../components/button/Btn";
 
 const Register = () => {
-  const location = useLocation();
-  const { updateUserProfile } = useUserContext();
-  // navigate
   const navigate = useNavigate();
-  const [error, setError] = React.useState(null);
-  const [user, setUser] = React.useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-  const [preview, setPreview] = React.useState(null);
+  const {
+    createUser,
+    signinWithGoogle,
+    updateUserProfile,
+    loading,
+    setLoading,
+  } = useUserContext();
 
-  const handleImageChange = async (event) => {
-    const file = event.target.files[0];
-    console.log(file);
-  };
-  function handleChange(e) {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  }
-  // handle the form
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    // validation
-    // Password should be minimum 8 characters
-    if (user.password.length < 8) {
-      setError("Password should be minimum 8 characters.");
-      toast.error("Password should be minimum 8 characters.", {
-        position: "top-right",
-      });
-      return;
-    }
-    // Must have an Lowercase letter in the password
-    const checkLower = /^(?=.*[a-z]).+$/;
-    if (!checkLower.test(user.password)) {
-      setError("Must have an Lowercase letter in the password");
-      toast.warn("Must have an Lowercase letter in the password", {
-        position: "top-right",
-      });
-      return;
-    }
-    // Must have an Uppercase letter in the password
-    const checkUpper = /^(?=.*[A-Z]).+$/;
-    if (!checkUpper.test(user.password)) {
-      setError("Must have an Uppercase letter in the password");
-      toast.warn("Must have an Uppercase letter in the password", {
-        position: "top-right",
-      });
-      return;
-    }
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const image = form.image.files[0];
 
-    // const route = "/login";
-    createUserWithEmailAndPassword(auth, user.email, user.password)
-      .then((result) => {
-        updateUserProfile(user.name, user.photoUrl)
-          .then(() => {
-            // jwt tokent request
-            const userObj = { user: user.email };
-            axios
-              .post("https://blog-api-a11.vercel.app/jwt", userObj, {
-                withCredentials: true,
-              })
-              .then((res) => {
-                console.log(res);
-                if (res.data.success) {
-                  toast.success("Successfully logged in", {
-                    position: "top-center",
-                  });
-                  setTimeout(() => {
-                    navigate(location?.state || "/");
-                  }, 3000);
-                }
-              });
-          })
-          .catch();
-      })
-      .catch((error) => {
-        toast.error(error.message, {
-          position: "top-right",
-        });
-      });
+    try {
+      setLoading(true);
+      // 1. Upload image and get image url
+      const image_url = await imageUpload(image);
+      console.log(image_url);
+      //2. User Registration
+      console.log({ email, password });
+      const result = await createUser(email, password);
+      console.log(result);
 
-    setUser({ name: "", email: "", password: "" });
-    e.target.reset();
-  }
+      // 3. Save username and photo in firebase
+      await updateUserProfile(name, image_url);
+      setLoading(false);
+      navigate("/");
+      toast.success("register Successful");
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      toast.error(err.message);
+    }
+  };
+
+  // handle google signin
+  const handleGoogleSignIn = async () => {
+    try {
+      await signinWithGoogle();
+
+      navigate("/");
+      toast.success("Signup Successful");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
+  };
+
   return (
-    <div className="flex flex-col justify-center items-center">
-      <Helmet>
-        <title>Bit Craft | register</title>
-      </Helmet>
-      <h2 className=" text_pri text-4xl my-4 font-bold text-center">
-        Register
-      </h2>
-      <ToastContainer />
-      <form
-        onSubmit={handleSubmit}
-        className="flex max-w-md flex-col md:w-[50%] w-[94%] gap-4"
-        action="#"
-      >
-        {/* inputs  */}
-        <Inp
-          type="text"
-          name={"name"}
-          required={true}
-          label={"Name"}
-          value={user.name}
-          placeholder={"name"}
-          onChange={handleChange}
-        />
-        <Inp
-          type="text"
-          name={"email"}
-          value={user.email}
-          label={"Email"}
-          required={true}
-          placeholder={"email"}
-          onChange={handleChange}
-        />
-        {/* //*NOTE image upload */}
-        <input type="file" accept="image/*" onChange={handleImageChange} />
-        {preview && (
-          <img
-            src={preview}
-            alt="Image preview"
-            style={{ width: "200px", height: "200px" }}
-          />
-        )}
-        <Inp
-          type="password"
-          name={"password"}
-          required={true}
-          value={user.password}
-          label={"Password"}
-          onChange={handleChange}
-        />
-        {/* error message */}
-        <span className="text-red-500">{error}</span>
-        {/* submit button  */}
-        <Btn type={"submit"}> Register</Btn>
-        <p className=" text-base text_sec text-center ">
-          Already have an Account?{" "}
-          <Link to="/login">
-            <span className="text-sky-500">Login</span>
+    <div className="flex justify-center items-center mt-6 min-h-screen">
+      <div className="flex flex-col max-w-md p-4 rounded-md sm:p-10 border-2 text-gray-900">
+        <div className="mb-6 text-center">
+          <h1 className="my-2 text-4xl font-bold">Register</h1>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-4">
+            <div>
+              <label
+                htmlFor="email"
+                className="block mb-2 text-base font-medium"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Enter Your Name Here"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500  text-gray-900"
+                data-temp-mail-org="0"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="image"
+                className="block mb-2 text-base font-medium"
+              >
+                Select Image:
+              </label>
+              <Inp type="file" id="image" name="image" accept="image/*" />
+            </div>
+            <div>
+              <label
+                htmlFor="email"
+                className="block mb-2 text-base font-medium"
+              >
+                Email address
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                required
+                placeholder="Enter Your Email Here"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500  text-gray-900"
+                data-temp-mail-org="0"
+              />
+            </div>
+            <div>
+              <div className="flex justify-between">
+                <label
+                  htmlFor="password"
+                  className="text-base font-medium mb-2"
+                >
+                  Password
+                </label>
+              </div>
+              <input
+                type="password"
+                name="password"
+                autoComplete="new-password"
+                id="password"
+                required
+                placeholder="*******"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500   text-gray-900"
+              />
+            </div>
+          </div>
+
+          <div>
+            <Btn
+              className={"w-full text-center mb-4"}
+              type={"submit"}
+              disabled={loading}
+            >
+              {loading ? (
+                <TbFidgetSpinner className="animate-spin m-auto" />
+              ) : (
+                "Continue"
+              )}
+            </Btn>
+          </div>
+        </form>
+        <div className="flex items-center space-x-1">
+          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
+          <p className="px-3 text-sm dark:text-gray-400">
+            Register with social accounts
+          </p>
+          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
+        </div>
+        <button
+          disabled={loading}
+          onClick={handleGoogleSignIn}
+          className="disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
+        >
+          <FcGoogle size={32} />
+
+          <p>Continue with Google</p>
+        </button>
+        <p className="px-6 text-sm text-center text-gray-400">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="hover:underline hover:text-rose-500 text-gray-600"
+          >
+            Login
           </Link>
+          .
         </p>
-      </form>
+      </div>
     </div>
   );
 };
