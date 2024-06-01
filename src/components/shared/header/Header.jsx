@@ -3,6 +3,7 @@ import { HiMiniBars3BottomRight, HiMiniBarsArrowDown } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import DesktopNav from "../../nav/desktop/DesktopNav";
 import MobileNav from "../../nav/mobile/MobileNav";
+import Badge from "../../profile/badge/Badge";
 const Header = () => {
   const [openBar, setOpenBar] = React.useState(false);
   return (
@@ -41,7 +42,7 @@ const Header = () => {
       </div>
       {/* right side profile */}
       <div className="lg:flex hidden ">
-        
+        <Badge />
       </div>
     </div>
   );

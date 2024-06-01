@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
 const DesktopNav = () => {
   return (
     <div className="flex items-center gap-7">
