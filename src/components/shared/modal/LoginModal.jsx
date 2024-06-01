@@ -15,6 +15,17 @@ import Inp from "../../input/Inp";
 
 const LoginModal = ({ closeModal, isOpen, modalHandler }) => {
   const [showPass, setShowPass] = React.useState(false);
+  function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    //TODO - login user
+    console.log({ email, password });
+    // reset from
+    form.email.value = "";
+    form.password.value = "";
+  }
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -48,63 +59,67 @@ const LoginModal = ({ closeModal, isOpen, modalHandler }) => {
                 >
                   Login
                 </DialogTitle>
-                <form className="mt-2">
-                  <p className="text-lg  font-semibold">Email:</p>
-                  <div className="w-full border-2 my-4 flex items-center">
-                    <Inp
-                      inputStyle={"border-none "}
-                      placeholder={"Enter your email"}
+                <form onSubmit={handleSubmit}>
+                  <div className="mt-2">
+                    <p className="text-lg  font-semibold">Email:</p>
+                    <div className="w-full border-2 my-4 flex items-center">
+                      <Inp
+                        inputStyle={"border-none "}
+                        placeholder={"Enter your email"}
+                        name={"email"}
+                      />
+                    </div>
+                    <p className="text-lg  font-semibold">Password:</p>
+                    <div className="w-full border-2 my-4 flex justify-between pr-4 items-center">
+                      <Inp
+                        type={`${showPass ? "text" : "password"}`}
+                        inputStyle={"border-none "}
+                        placeholder={"Enter your password"}
+                        name={"password"}
+                      />
+                      {showPass ? (
+                        <IoMdEyeOff
+                          className="text-xl cursor-pointer"
+                          onClick={() => setShowPass(!showPass)}
+                        />
+                      ) : (
+                        <IoMdEye
+                          className="text-xl cursor-pointer"
+                          onClick={() => setShowPass(!showPass)}
+                        />
+                      )}
+                    </div>
+                  </div>
+                  <hr className="mt-8 " />
+                  <div className="flex  justify-around">
+                    <Btn
+                      className="w-[150px]"
+                      type="submit"
+                      label={"Login"}
+                      onClick={modalHandler}
+                    />
+                    <Btn
+                      label={"Cancel"}
+                      className="w-[150px] !bg-[#fd6b22] "
+                      type="button"
+                      onClick={closeModal}
                     />
                   </div>
-                  <p className="text-lg  font-semibold">Password:</p>
-                  <div className="w-full border-2 my-4 flex justify-between pr-4 items-center">
-                    <Inp
-                      type={`${showPass ? "text" : "password"}`}
-                      inputStyle={"border-none "}
-                      placeholder={"Enter your password"}
-                    />
-                    {showPass ? (
-                      <IoMdEyeOff
-                        className="text-xl cursor-pointer"
-                        onClick={() => setShowPass(!showPass)}
-                      />
-                    ) : (
-                      <IoMdEye
-                        className="text-xl cursor-pointer"
-                        onClick={() => setShowPass(!showPass)}
-                      />
-                    )}
+                  <h4 className="mt-4 text-center">
+                    {`Don't have an account?`}
+                    <Link onClick={closeModal} to={"/register"}>
+                      <span className="font-semibold text_brand_pri">
+                        Register
+                      </span>
+                    </Link>
+                  </h4>
+                  {/* google login  */}
+                  <p className="text-center my-2 text_third">or login with</p>
+
+                  <div className="flex justify-center">
+                    <LogInButton />
                   </div>
                 </form>
-                <hr className="mt-8 " />
-                <div className="flex  justify-around">
-                  <Btn
-                    className="w-[150px]"
-                    type="button"
-                    label={"Login"}
-                    onClick={modalHandler}
-                  />
-                  <Btn
-                    label={"Cancel"}
-                    className="w-[150px] !bg-[#fd6b22] "
-                    type="button"
-                    onClick={closeModal}
-                  />
-                </div>
-                <h4 className="mt-4 text-center">
-                  {`Don't have an account?`}
-                  <Link onClick={closeModal} to={"/register"}>
-                    <span className="font-semibold text_brand_pri">
-                      Register
-                    </span>
-                  </Link>
-                </h4>
-                {/* google login  */}
-                <p className="text-center my-2 text_third">or login with</p>
-
-                <div className="flex justify-center">
-                  <LogInButton />
-                </div>
               </DialogPanel>
             </TransitionChild>
           </div>

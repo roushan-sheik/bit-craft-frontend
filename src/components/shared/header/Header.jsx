@@ -1,20 +1,23 @@
-import { Button } from "@material-tailwind/react";
 import React from "react";
 import { HiMiniBars3BottomRight, HiMiniBarsArrowDown } from "react-icons/hi2";
+import { MdOutlineCancelPresentation } from "react-icons/md";
 import { Link } from "react-router-dom";
+import useUserContext from "../../../hooks/useUserContext";
+import Btn from "../../button/Btn";
 import DesktopNav from "../../nav/desktop/DesktopNav";
 import MobileNav from "../../nav/mobile/MobileNav";
 import Badge from "../../profile/badge/Badge";
+import UserInfo from "../../profile/userInfo/UserInfo";
 import LoginModal from "../modal/LoginModal";
 const Header = () => {
   const [openBar, setOpenBar] = React.useState(false);
   const [showForm, setShowForm] = React.useState(false);
-  function closeModal() {
-    setShowForm(false);
-  }
-  function handleLoginClick() {
-    setShowForm(true);
-  }
+  const [showInfo, setShowInfo] = React.useState(false);
+  const { user, loading } = useUserContext();
+  console.log(user);
+  // if (loading) {
+  //   return <Spinner />;
+  // }
   return (
     <div className="flex justify-between  flex-grow-1 border shadow-sm py-3 lg:px-6 px-2">
       {/* left side main logo  */}
@@ -50,10 +53,29 @@ const Header = () => {
         </div>
       </div>
       {/* right side profile */}
-      <div className="lg:flex hidden ">
-        <Button onClick={handleLoginClick}>Login</Button>
-        <Badge />
-        {showForm && <LoginModal isOpen={showForm} closeModal={closeModal} />}
+      <div className="lg:flex hidden mr-2 cursor-pointer relative">
+        {user ? (
+          <div onClick={() => setShowInfo(!showInfo)}>
+            <Badge image={user.photoURL} />
+          </div>
+        ) : (
+          <Btn onClick={() => setShowForm(true)}>Login</Btn>
+        )}
+        {showForm && !user && (
+          <LoginModal isOpen={showForm} closeModal={() => setShowForm(false)} />
+        )}
+        {showInfo && user && (
+          <div className="bg-gray-200 absolute top-[70px] w-[250px] right-[5px] p-4 rounded-md">
+            {/* cancel icon box  */}
+            <span
+              onClick={() => setShowInfo(!showInfo)}
+              className="text-4xl absolute top-1 text_brand_sec right-2"
+            >
+              <MdOutlineCancelPresentation />
+            </span>
+            <UserInfo />
+          </div>
+        )}
       </div>
     </div>
   );

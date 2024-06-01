@@ -1,4 +1,3 @@
-import { Button } from "@material-tailwind/react";
 import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React from "react";
@@ -9,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Inp from "../../components/input/Inp";
 import useUserContext from "../../hooks/useUserContext";
 import auth from "../../services/firebase";
+import Btn from "./../../components/button/Btn";
 
 const Register = () => {
   const location = useLocation();
@@ -19,9 +19,14 @@ const Register = () => {
   const [user, setUser] = React.useState({
     name: "",
     email: "",
-    photoUrl: "",
     password: "",
   });
+  const [preview, setPreview] = React.useState(null);
+
+  const handleImageChange = async (event) => {
+    const file = event.target.files[0];
+    console.log(file);
+  };
   function handleChange(e) {
     setUser({ ...user, [e.target.name]: e.target.value });
   }
@@ -88,13 +93,13 @@ const Register = () => {
         });
       });
 
-    setUser({ name: "", email: "", photoUrl: "", password: "" });
+    setUser({ name: "", email: "", password: "" });
     e.target.reset();
   }
   return (
     <div className="flex flex-col justify-center items-center">
       <Helmet>
-        <title>CinemaGhor | register</title>
+        <title>Bit Craft | register</title>
       </Helmet>
       <h2 className=" text_pri text-4xl my-4 font-bold text-center">
         Register
@@ -124,15 +129,15 @@ const Register = () => {
           placeholder={"email"}
           onChange={handleChange}
         />
-        <Inp
-          type="text"
-          name={"photoUrl"}
-          label={"Photo Url"}
-          value={user.photoUrl}
-          required={true}
-          placeholder={"http://server/arifamoni.jpg"}
-          onChange={handleChange}
-        />
+        {/* //*NOTE image upload */}
+        <input type="file" accept="image/*" onChange={handleImageChange} />
+        {preview && (
+          <img
+            src={preview}
+            alt="Image preview"
+            style={{ width: "200px", height: "200px" }}
+          />
+        )}
         <Inp
           type="password"
           name={"password"}
@@ -144,7 +149,7 @@ const Register = () => {
         {/* error message */}
         <span className="text-red-500">{error}</span>
         {/* submit button  */}
-        <Button type={"submit"}> Register</Button>
+        <Btn type={"submit"}> Register</Btn>
         <p className=" text-base text_sec text-center ">
           Already have an Account?{" "}
           <Link to="/login">
