@@ -8,7 +8,6 @@ import Badge from "../../profile/badge/Badge";
 import UserInfo from "../../profile/userInfo/UserInfo";
 import LoginModal from "../modal/LoginModal";
 const Header = () => {
-  const [openBar, setOpenBar] = React.useState(false);
   const [showForm, setShowForm] = React.useState(false);
   const [showInfo, setShowInfo] = React.useState(false);
   const { user, loading } = useUserContext();
@@ -71,7 +70,7 @@ const Header = () => {
             >
               <MdOutlineCancelPresentation />
             </span>
-            <UserInfo />
+            <UserInfo sho />
           </div>
         )}
       </div>

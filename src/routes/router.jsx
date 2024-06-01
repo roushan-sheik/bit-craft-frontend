@@ -5,7 +5,9 @@ import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import News from "../pages/news/News";
 import Products from "../pages/products/Products";
+import Profile from "../pages/profile/Profile";
 import Register from "../pages/register/Register";
+import UpdateProfile from "./../pages/updateProfile/UpdateProfile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +28,18 @@ const router = createBrowserRouter([
       {
         path: "/community",
         element: <Community />,
+      },
+      {
+        path: "/my-profile",
+        element: <Profile />,
+      },
+      {
+        path: "/update-profile",
+        element: <UpdateProfile />,
+      },
+      {
+        path: "/my-profile",
+        element: <Profile />,
       },
       {
         path: "/login",

@@ -2,15 +2,16 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const MobileNav = () => {
-
   return (
-    <div className="flex flex-col bg-gray-200 rounded-md  py-4 px-8 gap-2 absolute right-0 top-14">
+    <>
       <NavLink
         to="/"
         className={({ isActive, isPending, isTransitioning }) =>
           [
             isPending ? "pending" : "",
-            isActive ? "text_brand_sec font-bold" : "",
+            isActive
+              ? "text_brand_sec text-lg cursor-pointer font-medium"
+              : "text-lg cursor-pointer font-medium",
             isTransitioning ? "transitioning" : "",
           ].join(" ")
         }
@@ -22,7 +23,9 @@ const MobileNav = () => {
         className={({ isActive, isPending, isTransitioning }) =>
           [
             isPending ? "pending" : "",
-            isActive ? "text_brand_sec font-bold" : "",
+            isActive
+              ? "text_brand_sec text-lg cursor-pointer font-medium"
+              : "text-lg cursor-pointer font-medium",
             isTransitioning ? "transitioning" : "",
           ].join(" ")
         }
@@ -34,7 +37,9 @@ const MobileNav = () => {
         className={({ isActive, isPending, isTransitioning }) =>
           [
             isPending ? "pending" : "",
-            isActive ? "text_brand_sec font-bold" : "",
+            isActive
+              ? "text_brand_sec text-lg cursor-pointer font-medium"
+              : "text-lg cursor-pointer font-medium",
             isTransitioning ? "transitioning" : "",
           ].join(" ")
         }
@@ -46,14 +51,16 @@ const MobileNav = () => {
         className={({ isActive, isPending, isTransitioning }) =>
           [
             isPending ? "pending" : "",
-            isActive ? "text_brand_sec font-bold" : "",
+            isActive
+              ? "text_brand_sec text-lg cursor-pointer font-medium"
+              : "text-lg cursor-pointer font-medium",
             isTransitioning ? "transitioning" : "",
           ].join(" ")
         }
       >
         Community
       </NavLink>
-    </div>
+    </>
   );
 };
 
