@@ -1,11 +1,20 @@
+import { Button } from "@material-tailwind/react";
 import React from "react";
 import { HiMiniBars3BottomRight, HiMiniBarsArrowDown } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import DesktopNav from "../../nav/desktop/DesktopNav";
 import MobileNav from "../../nav/mobile/MobileNav";
 import Badge from "../../profile/badge/Badge";
+import LoginModal from "../modal/LoginModal";
 const Header = () => {
   const [openBar, setOpenBar] = React.useState(false);
+  const [showForm, setShowForm] = React.useState(false);
+  function closeModal() {
+    setShowForm(false);
+  }
+  function handleLoginClick() {
+    setShowForm(true);
+  }
   return (
     <div className="flex justify-between  flex-grow-1 border shadow-sm py-3 lg:px-6 px-2">
       {/* left side main logo  */}
@@ -42,7 +51,9 @@ const Header = () => {
       </div>
       {/* right side profile */}
       <div className="lg:flex hidden ">
+        <Button onClick={handleLoginClick}>Login</Button>
         <Badge />
+        {showForm && <LoginModal isOpen={showForm} closeModal={closeModal} />}
       </div>
     </div>
   );
