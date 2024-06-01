@@ -5,11 +5,11 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { Button } from "@material-tailwind/react";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { Link } from "react-router-dom";
+import Btn from "../../button/Btn";
 import LogInButton from "../../button/LogInButton";
 import Inp from "../../input/Inp";
 
@@ -78,22 +78,18 @@ const LoginModal = ({ closeModal, isOpen, modalHandler }) => {
                 </form>
                 <hr className="mt-8 " />
                 <div className="flex  justify-around">
-                  <Button
+                  <Btn
                     className="w-[150px]"
                     type="button"
-                    color="blue"
+                    label={"Login"}
                     onClick={modalHandler}
-                  >
-                    Login
-                  </Button>
-                  <Button
-                    color="red"
-                    className="w-[150px]"
+                  />
+                  <Btn
+                    label={"Cancel"}
+                    className="w-[150px] !bg-[#fd6b22] "
                     type="button"
                     onClick={closeModal}
-                  >
-                    Cancel
-                  </Button>
+                  />
                 </div>
                 <h4 className="mt-4 text-center">
                   {`Don't have an account?`}

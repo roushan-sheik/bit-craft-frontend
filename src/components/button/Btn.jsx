@@ -1,13 +1,16 @@
+import { Button } from "@material-tailwind/react";
 import React from "react";
 
-const Btn = ({ label, style, children, type }) => {
+const Btn = ({ color, label, className, type, onClick }) => {
   return (
-    <button
+    <Button
       type={type}
-      className={`rounded-lg bg-sky-500 px-8 py-3 text-xl text-white duration-300 active:scale-95 ${style}`}
+      color={color}
+      onClick={onClick}
+      className={`${className} capitalize bg-[#00a6e5] text-lg`}
     >
-      {children || label || "Custom Button"}
-    </button>
+      {label}
+    </Button>
   );
 };
 
