@@ -31,8 +31,11 @@ h1 h2 h3 h4 {
   background: rgba(19, 19, 19, 0.05);
 }
 /* text color  */
-.text_brand {
-  color: #ee5253;
+.text_brand_pri {
+  color: #00a6e5;
+}
+.text_brand_sec {
+  color: #fd6b22;
 }
 .text_pri {
   color: rgba(19, 19, 19);
