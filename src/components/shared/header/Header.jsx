@@ -1,11 +1,9 @@
 import React from "react";
-import { HiMiniBars3BottomRight, HiMiniBarsArrowDown } from "react-icons/hi2";
 import { MdOutlineCancelPresentation } from "react-icons/md";
 import { Link } from "react-router-dom";
 import useUserContext from "../../../hooks/useUserContext";
 import Btn from "../../button/Btn";
 import DesktopNav from "../../nav/desktop/DesktopNav";
-import MobileNav from "../../nav/mobile/MobileNav";
 import Badge from "../../profile/badge/Badge";
 import UserInfo from "../../profile/userInfo/UserInfo";
 import LoginModal from "../modal/LoginModal";
@@ -36,7 +34,7 @@ const Header = () => {
           <DesktopNav />
         </div>
         {/* mobile nav list  */}
-        <div className="lg:hidden flex">
+        {/* <div className="lg:hidden flex">
           {openBar && <MobileNav />}
 
           {openBar ? (
@@ -50,10 +48,10 @@ const Header = () => {
               className="text-4xl"
             />
           )}
-        </div>
+        </div> */}
       </div>
       {/* right side profile */}
-      <div className="lg:flex hidden mr-2 cursor-pointer relative">
+      <div className=" mr-2 cursor-pointer relative">
         {user ? (
           <div onClick={() => setShowInfo(!showInfo)}>
             <Badge image={user.photoURL} />
