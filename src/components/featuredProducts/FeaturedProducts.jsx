@@ -18,7 +18,7 @@ const FeaturedProducts = () => {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
         {products?.map((product, index) => (
           <Product product={product} key={index + 444} />
         ))}
