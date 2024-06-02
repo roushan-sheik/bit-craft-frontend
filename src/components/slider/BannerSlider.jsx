@@ -8,8 +8,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import required modules
-import { Button } from "@material-tailwind/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import Btn from "../button/Btn";
 
 export default function BannerSlider() {
   const progressCircle = useRef(null);
@@ -40,15 +40,17 @@ export default function BannerSlider() {
           <div className=" banner1 banner_common z-0  relative h-[600px]  ">
             <div className="absolute top-0 p-10 left-0  flex justify-center items-center flex-col h-full">
               <h2 className="md:text-6xl text-3xl md:font-bold font-semibold   text-white text-center">
-                The Art of Cinematography: Exploring Visual Storytelling
+                The best crypto tools in 2024
               </h2>
               <p className="text-base text-white mt-6 md:w-[60%] w-full mx-auto">
-                Delve into the captivating world of cinematography and its role
-                in shaping cinematic narratives.
+                A Web3 AI tech for CeFi, DeFi, and NFT markets via
+                conversational AI. AI deal execution interface Automated AI
+                trading In-depth market analysis (off-chain/on-chain) AI trading
+                signals AI arbitrage Portfolio and NFT management
               </p>
               <div className="inline-flex justify-center flex-col mt-8">
                 <a href="#recent_blog">
-                  <Button color="blue">Explore Now</Button>
+                  <Btn color="blue">Explore Now</Btn>
                 </a>
               </div>
             </div>
@@ -58,16 +60,17 @@ export default function BannerSlider() {
           <div className=" banner2 banner_common z-0  relative h-[600px]  ">
             <div className="absolute top-0 p-10 left-0  flex justify-center items-center flex-col h-full">
               <h2 className="md:text-6xl text-3xl md:font-bold font-semibold   text-white text-center">
-                {"The Art of Cinematography: Exploring Visual Storytelling"}
+                {"    The best file storage and sharing in 2024."}
               </h2>
 
               <p className="text-base text-white mt-6 md:w-[60%] w-full mx-auto">
-                Revisit the timeless classic Casablanca and discover why it
-                remains a beloved masterpiece.
+                The best file storage and sharing in 2024. File storage apps
+                provide secure cloud storage for managing and accessing files
+                from anywhere.
               </p>
               <div className="inline-flex justify-center flex-col mt-8">
                 <a href="#recent_blog">
-                  <Button color="blue">Explore Now</Button>
+                  <Btn color="blue">Explore Now</Btn>
                 </a>
               </div>
             </div>
@@ -77,16 +80,18 @@ export default function BannerSlider() {
           <div className=" banner3 banner_common z-0  relative h-[600px]  ">
             <div className="absolute top-0 p-10 left-0 flex justify-center items-center flex-col h-full">
               <h2 className="md:text-6xl text-3xl md:font-bold font-semibold  text-white text-center">
-                Behind the Scenes: The Making of a Blockbuster
+                The best ai coding assistants in 2024
               </h2>
 
               <p className="text-base text-white mt-6 md:w-[60%] w-full mx-auto">
-                Go behind the scenes of a blockbuster film and discover the
-                magic of filmmaking.
+                AI coding assistants use artificial intelligence to assist
+                developers with their coding tasks. These assistants analyze
+                code, provide suggestions, offer auto-completion, and help catch
+                errors or bugs
               </p>
               <div className="inline-flex justify-center flex-col mt-8">
                 <a href="#recent_blog">
-                  <Button color="blue">Explore Now</Button>
+                  <Btn color="blue">Explore Now</Btn>
                 </a>
               </div>
             </div>
@@ -96,16 +101,20 @@ export default function BannerSlider() {
           <div className=" banner4 banner_common z-0  relative h-[600px]  ">
             <div className="absolute top-0 p-10 left-0  flex justify-center items-center flex-col h-full">
               <h2 className="md:text-6xl text-3xl md:font-bold font-semibold  text-white text-center">
-                Exploring Genre: The Evolution of Science Fiction Cinema
+                The best data visualization tools in 2024
               </h2>
 
               <p className="text-base text-white mt-6 md:w-[60%] w-full mx-auto">
-                Journey through the evolution of science fiction cinema and its
-                impact on popular culture.
+                Open-source data pipeline tool for transforming and integrating
+                data. The modern replacement for Airflow. - Integrate and
+                synchronize data from 3rd party sources - Build real-time and
+                batch pipelines to transform data using Python, SQL, and R -
+                Run, monitor, and orchestrate thousands of pipelines without
+                losing sleep
               </p>
               <div className="inline-flex justify-center flex-col mt-8">
                 <a href="#recent_blog">
-                  <Button color="blue">Explore Now</Button>
+                  <Btn color="blue">Explore Now</Btn>
                 </a>
               </div>
             </div>
@@ -115,16 +124,18 @@ export default function BannerSlider() {
           <div className=" banner5 banner_common z-0  relative h-[600px]  ">
             <div className="absolute top-0 p-10 left-0 flex justify-center items-center flex-col h-full">
               <h2 className="md:text-6xl text-3xl md:font-bold font-semibold text-white text-center">
-                Iconic Movie Soundtracks: A Symphony of Emotion
+                The best web hosting services in 2024
               </h2>
 
               <p className="text-base text-white mt-6 md:w-[60%] w-full mx-auto">
-                Celebrate the power of iconic movie soundtracks and their
-                ability to evoke emotion.
+                Web hosting platforms provide the infrastructure and services
+                needed to make your website accessible on the internet. These
+                platforms offer various hosting plans and features to
+                accommodate different types of websites and online projects.
               </p>
               <div className="inline-flex justify-center flex-col mt-8">
                 <a href="#recent_blog">
-                  <Button color="blue">Explore Now</Button>
+                  <Btn color="blue">Explore Now</Btn>
                 </a>
               </div>
             </div>
@@ -134,16 +145,17 @@ export default function BannerSlider() {
           <div className=" banner6 banner_common z-0  relative h-[600px]  ">
             <div className="absolute top-0 p-10 left-0 flex justify-center items-center flex-col h-full">
               <h2 className="md:text-6xl text-3xl md:font-bold font-semibold text-white text-center">
-                Exploring Diversity in Cinema: Representation Matters
+                The best 3d & animation in 2024
               </h2>
 
               <p className="text-base text-white mt-6 md:w-[60%] w-full mx-auto">
-                Explore the importance of diversity and representation in
-                shaping cinematic narratives.
+                Cascadeur is a standalone 3D software that lets you create
+                keyframe animation, as well as clean up and edit any imported
+                ones.
               </p>
               <div className="inline-flex justify-center flex-col mt-8">
                 <a href="#recent_blog">
-                  <Button color="blue">Explore Now</Button>
+                  <Btn color="blue">Explore Now</Btn>
                 </a>
               </div>
             </div>
@@ -153,16 +165,18 @@ export default function BannerSlider() {
           <div className=" banner7 banner_common z-0  relative h-[600px]  ">
             <div className="absolute top-0 p-10 left-0 flex justify-center items-center flex-col h-full">
               <h2 className="md:text-6xl text-3xl md:font-bold font-semibold text-white text-center">
-                The Rise of Streaming Services: Reshaping the Movie Industry
+                The best crypto wallets in 2024
               </h2>
 
               <p className="text-base text-white mt-6 md:w-[60%] w-full mx-auto">
-                Examine the impact of streaming services on the traditional
-                movie industry.
+                A crypto wallet is a digital wallet for storing, sending, and
+                receiving cryptocurrencies. It's like a virtual bank account for
+                your digital currencies. There are different types of wallets,
+                including software, hardware, and online wallets.
               </p>
               <div className="inline-flex justify-center flex-col mt-8">
                 <a href="#recent_blog">
-                  <Button color="blue">Explore Now</Button>
+                  <Btn color="blue">Explore Now</Btn>
                 </a>
               </div>
             </div>
@@ -172,16 +186,17 @@ export default function BannerSlider() {
           <div className=" banner8 banner_common z-0  relative h-[600px]  ">
             <div className="absolute top-0 p-10 left-0 flex justify-center items-center flex-col h-full">
               <h2 className="md:text-6xl text-3xl md:font-bold font-semibold text-white text-center">
-                "The Art of Adaptation: From Page to Screen
+                The best virtual office platforms in 2024
               </h2>
 
               <p className="text-base text-white mt-6 md:w-[60%] w-full mx-auto">
-                Discover the challenges and triumphs of adapting literature for
-                the silver screen.
+                Focusmate changes the way you work by partnering you with an
+                accountability partner for a live, virtual coworking session
+                that will keep you on task.
               </p>
               <div className="inline-flex justify-center flex-col mt-8">
                 <a href="#recent_blog">
-                  <Button color="blue">Explore Now</Button>
+                  <Btn color="blue">Explore Now</Btn>
                 </a>
               </div>
             </div>
