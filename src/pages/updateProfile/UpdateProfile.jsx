@@ -36,12 +36,12 @@ const UpdateProfile = () => {
     }
   };
   return (
-    <div className="max-w-6xl mx-auto my-8">
+    <div className="max-w-6xl mx-auto my-8 ">
       <Helmet>
         <title>User - Update Profile</title>
       </Helmet>
       <ToastContainer />
-      <div className="mt-8">
+      <div className="mt-8 ">
         <div className="flex flex-col items-center ">
           <img
             className="rounded-full w-[150px] h-[150px]"
@@ -54,7 +54,7 @@ const UpdateProfile = () => {
         <div className="flex flex-col items-center">
           <form
             onSubmit={handleSubmit}
-            className="card-body rounded-md mt-4 lg:w-50%] border"
+            className="card-body rounded-md mt-4 lg:w-50%] w-[90%] mx-auto border"
           >
             <div className="border-2 flex gap-2 p-2 rounded-md mb-4">
               <label className="label font-semibold">
