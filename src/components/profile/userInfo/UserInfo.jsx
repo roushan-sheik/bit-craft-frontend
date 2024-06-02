@@ -8,10 +8,7 @@ const UserInfo = () => {
   const { user, loading, logoutUser } = useUserContext();
 
   return (
-    <div className=" ">
-      {/* ======================== modal ======================== */}
-
-      {/* ======================== modal ======================== */}
+    <div className="">
       <p className="text-xl hidden lg:flex mt-4 select-none cursor-auto ">
         Hello !
       </p>

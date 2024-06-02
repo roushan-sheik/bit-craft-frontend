@@ -19,7 +19,7 @@ export default function BannerSlider() {
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
   return (
-    <div className="">
+    <div className="z-0">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

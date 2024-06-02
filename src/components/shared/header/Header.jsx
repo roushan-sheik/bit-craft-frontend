@@ -16,7 +16,7 @@ const Header = () => {
   //   return <Spinner />;
   // }
   return (
-    <div className="flex justify-between  flex-grow-1 border shadow-sm py-3 lg:px-6 px-2">
+    <div className=" flex justify-between  flex-grow-1 border shadow-sm py-3 lg:px-6 px-2">
       {/* left side main logo  */}
       <Link to={"/"}>
         <div className="flex cursor-pointer lg:basis-[25%] mb-2 items-center relative">
@@ -32,22 +32,6 @@ const Header = () => {
         <div className="hidden lg:flex">
           <DesktopNav />
         </div>
-        {/* mobile nav list  */}
-        {/* <div className="lg:hidden flex">
-          {openBar && <MobileNav />}
-
-          {openBar ? (
-            <HiMiniBarsArrowDown
-              className="text-4xl"
-              onClick={() => setOpenBar(!openBar)}
-            />
-          ) : (
-            <HiMiniBars3BottomRight
-              onClick={() => setOpenBar(!openBar)}
-              className="text-4xl"
-            />
-          )}
-        </div> */}
       </div>
       {/* right side profile */}
       <div className=" mr-2 cursor-pointer relative">
@@ -62,7 +46,7 @@ const Header = () => {
           <LoginModal isOpen={showForm} closeModal={() => setShowForm(false)} />
         )}
         {showInfo && user && (
-          <div className="bg-gray-200 absolute top-[70px] w-[250px] right-[5px] p-4 rounded-md">
+          <div className="z-50 bg-gray-200 absolute top-[70px] w-[250px] right-[5px] p-4 rounded-md">
             {/* cancel icon box  */}
             <span
               onClick={() => setShowInfo(!showInfo)}
@@ -70,7 +54,7 @@ const Header = () => {
             >
               <MdOutlineCancelPresentation />
             </span>
-            <UserInfo sho />
+            <UserInfo />
           </div>
         )}
       </div>

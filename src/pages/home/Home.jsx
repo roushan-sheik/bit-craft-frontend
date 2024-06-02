@@ -4,7 +4,9 @@ import BannerSlider from "../../components/slider/BannerSlider";
 const Home = () => {
   return (
     <div>
-      <BannerSlider />
+      <div className="z-0">
+        <BannerSlider />
+      </div>
       <Button>Button</Button>
     </div>
   );
