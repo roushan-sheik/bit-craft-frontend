@@ -29,9 +29,9 @@ const Register = () => {
       setLoading(true);
       // 1. Upload image and get image url
       const image_url = await imageUpload(image);
-      console.log(image_url);
+      // console.log(image_url);
       //2. User Registration
-      console.log({ email, password });
+      // console.log({ email, password });
       const result = await createUser(email, password);
       console.log(result);
 
@@ -59,7 +59,6 @@ const Register = () => {
       toast.error(err.message);
     }
   };
-
   return (
     <div className="flex px-8 justify-center items-center mt-6 min-h-screen">
       <div className="flex flex-col max-w-md p-4 rounded-md sm:p-10 border-2 text-gray-900">

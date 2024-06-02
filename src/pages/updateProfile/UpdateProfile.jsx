@@ -19,13 +19,11 @@ const UpdateProfile = () => {
     const form = e.target;
     const name = form.name.value;
     const image = form.image.files[0];
-
     try {
       setLoading(true);
       // 1. Upload image and get image url
       const image_url = await imageUpload(image);
-      console.log(image_url);
-
+      // console.log(image_url);
       // 3. Save username and photo in firebase
       await updateUserProfile(name, image_url);
       setLoading(false);

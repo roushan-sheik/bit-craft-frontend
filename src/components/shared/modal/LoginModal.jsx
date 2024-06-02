@@ -78,12 +78,12 @@ const LoginModal = ({ closeModal, isOpen, modalHandler }) => {
                         name={"password"}
                       />
                       {showPass ? (
-                        <IoMdEyeOff
+                        <IoMdEye
                           className="text-xl cursor-pointer"
                           onClick={() => setShowPass(!showPass)}
                         />
                       ) : (
-                        <IoMdEye
+                        <IoMdEyeOff
                           className="text-xl cursor-pointer"
                           onClick={() => setShowPass(!showPass)}
                         />

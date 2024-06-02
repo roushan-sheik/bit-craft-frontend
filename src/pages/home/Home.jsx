@@ -1,9 +1,10 @@
 import { Button } from "@material-tailwind/react";
 import React from "react";
+import BannerSlider from "../../components/slider/BannerSlider";
 const Home = () => {
   return (
     <div>
-      <h2>Home</h2>
+      <BannerSlider />
       <Button>Button</Button>
     </div>
   );
