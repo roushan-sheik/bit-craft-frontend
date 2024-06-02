@@ -1,0 +1,58 @@
+[
+  {
+    "id": "1",
+    "name": "Product Hunt",
+    "image": "https://cdn.iconscout.com/icon/free/png-256/free-product-hunt-3771061-3147678.png",
+    "tags": ["web app", "discovery", "community"],
+    "description": "A platform to discover and share the latest tech products."
+  },
+  {
+    "id": "2",
+    "name": "ChatGPT",
+    "image": "https://thumbs.dreamstime.com/b/chatgpt-ai-chatbot-openai-d-render-illustration-logo-270401324.jpg",
+    "tags": ["AI tool", "chatbot", "NLP"],
+    "description": "An AI language model that can generate human-like text based on prompts."
+  },
+  {
+    "id": "3",
+    "name": "Slack",
+    "image": "https://cdn3d.iconscout.com/3d/free/preview/slack-5562381-4642726@0.png?f=webp&h=700",
+    "tags": ["software", "communication", "productivity"],
+    "description": "A messaging app for teams that brings all your communication together in one place."
+  },
+  {
+    "id": "4",
+    "name": "Notion",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png",
+    "tags": ["web app", "productivity", "note-taking"],
+    "description": "An all-in-one workspace for notes, tasks, wikis, and databases."
+  },
+  {
+    "id": "5",
+    "name": "Figma",
+    "image": "https://i.pinimg.com/736x/a5/58/b4/a558b426cb8973523f37bbed94cf0f09.jpg",
+    "tags": ["web app", "design", "collaboration"],
+    "description": "A cloud-based design tool for creating interfaces and collaborating in real-time."
+  },
+  {
+    "id": "6",
+    "name": "Among Us",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUxAzNsW9fnUnXP5ylD6iau_dwXa-S1EfF_Q&s",
+    "tags": ["game", "multiplayer", "social deduction"],
+    "description": "A multiplayer game where players work together to complete tasks while impostors try to eliminate them."
+  },
+  {
+    "id": "7",
+    "name": "Zoom",
+    "image": "https://img.freepik.com/premium-vector/zoom-meeting-logo_628407-1899.jpg",
+    "tags": ["software", "video conferencing", "communication"],
+    "description": "A video conferencing tool that allows you to meet with others virtually."
+  },
+  {
+    "id": "8",
+    "name": "VS Code",
+    "image": "https://logowik.com/content/uploads/images/visual-studio-code7642.jpg",
+    "tags": ["software", "IDE", "development"],
+    "description": "A source-code editor made by Microsoft for Windows, Linux, and macOS."
+  }
+]
