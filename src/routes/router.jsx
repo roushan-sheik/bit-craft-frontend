@@ -29,6 +29,7 @@ const router = createBrowserRouter([
       {
         path: "/products/:id",
         element: <ProductDetails />,
+        loader: homeLoader,
       },
       {
         path: "/news",

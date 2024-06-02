@@ -5,7 +5,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import Btn from "../button/Btn";
 const Product = ({ product }) => {
-  const { name, image, tags, description } = product;
+  const { name, image, tags, title } = product;
   return (
     <div className="bg-gray-50 backdrop-blur-md rounded-md  shadow-sm border-2 hover:border-[#00a4e535] flex flex-col lg:flex-row gap-4">
       <div className="p-4 ">
@@ -22,7 +22,7 @@ const Product = ({ product }) => {
         <Link to={`/products/${name}`}>
           <h2 className="text-xl font-semibold">{name}</h2>
         </Link>
-        <p className="text_third">{description}</p>
+        <p className="text_third">{title}</p>
         {/* icon box  */}
         <div className="mt-2 flex items-center justify-between">
           <p className="text_third bg-gray-200 px-2 py-1 rounded-md">#{tags}</p>
@@ -46,5 +46,5 @@ const Product = ({ product }) => {
 
 export default Product;
 Product.propTypes = {
-  product: PropTypes.obj,
+  product: PropTypes.any,
 };
