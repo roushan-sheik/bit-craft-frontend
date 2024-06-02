@@ -11,7 +11,7 @@ const Header = () => {
   const [showForm, setShowForm] = React.useState(false);
   const [showInfo, setShowInfo] = React.useState(false);
   const { user, loading } = useUserContext();
-  console.log(user);
+  // console.log(user);
   // if (loading) {
   //   return <Spinner />;
   // }
