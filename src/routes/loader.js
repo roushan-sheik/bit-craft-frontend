@@ -1,5 +1,4 @@
 import axios from "axios";
-
 //NOTE - loader function
 const homeLoader = async () => {
   const products = await fetchData("./products.json");
