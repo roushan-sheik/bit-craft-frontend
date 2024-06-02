@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../layout/Root";
+import AddProduct from "../pages/addProduct/AddProduct";
 import Community from "../pages/community/Community";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
+import MyProducts from "../pages/myProducts/MyProducts";
 import News from "../pages/news/News";
 import ProductDetails from "../pages/productDetails/ProductDetails";
 import Products from "../pages/products/Products";
@@ -27,9 +29,17 @@ const router = createBrowserRouter([
         element: <Products />,
       },
       {
+        path: "/add-product",
+        element: <AddProduct />,
+      },
+      {
         path: "/products/:id",
         element: <ProductDetails />,
         loader: homeLoader,
+      },
+      {
+        path: "/my-products",
+        element: <MyProducts />,
       },
       {
         path: "/news",

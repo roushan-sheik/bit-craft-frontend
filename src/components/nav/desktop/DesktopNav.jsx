@@ -29,6 +29,30 @@ const DesktopNav = () => {
         Products
       </NavLink>
       <NavLink
+        to="/add-product"
+        className={({ isActive, isPending, isTransitioning }) =>
+          [
+            isPending ? "pending" : "",
+            isActive ? "text_brand_sec font-bold" : "",
+            isTransitioning ? "transitioning" : "",
+          ].join(" ")
+        }
+      >
+        Add Product
+      </NavLink>
+      <NavLink
+        to="/my-products"
+        className={({ isActive, isPending, isTransitioning }) =>
+          [
+            isPending ? "pending" : "",
+            isActive ? "text_brand_sec font-bold" : "",
+            isTransitioning ? "transitioning" : "",
+          ].join(" ")
+        }
+      >
+        My Products
+      </NavLink>
+      <NavLink
         to="/news"
         className={({ isActive, isPending, isTransitioning }) =>
           [
