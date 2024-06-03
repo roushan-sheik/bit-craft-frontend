@@ -11,6 +11,7 @@ const Inp = ({
   inputStyle,
   onChange,
   required,
+  disabled,
   boxStyle,
   accept,
 }) => {
@@ -21,6 +22,7 @@ const Inp = ({
         {label}
       </label>
       <input
+        disabled={disabled}
         onChange={onChange}
         placeholder={placeholder}
         onClick={onClick}

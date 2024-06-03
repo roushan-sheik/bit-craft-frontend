@@ -25,6 +25,6 @@ const FeaturedProducts = () => {
       </div>
     </>
   );
-};
+}
 
 export default FeaturedProducts;

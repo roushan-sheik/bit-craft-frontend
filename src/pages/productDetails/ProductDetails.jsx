@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { BsFillHandIndexThumbFill } from "react-icons/bs";
+import { FaBox, FaBoxOpen } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link, useParams } from "react-router-dom";
 import Btn from "../../components/button/Btn";
@@ -9,6 +10,7 @@ import TinyProfile from "../../components/profile/tiny/TinyProfile";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 const ProductDetails = () => {
   const axiosCommon = useAxiosCommon();
+  const [showTag, setShowTag] = React.useState(false);
   const { id } = useParams();
 
   const { data: products, isLoading } = useQuery({
@@ -25,7 +27,7 @@ const ProductDetails = () => {
   const {
     name,
     image,
-    category,
+    tags,
     createdAt,
     user_email,
     user_name,
@@ -61,9 +63,30 @@ const ProductDetails = () => {
               <Link to={-1}>
                 <Btn className={"bg_sec"}>Back</Btn>
               </Link>
-              <p className="text_third bg-gray-200 px-2 py-1 rounded-md">
-                #{category}
-              </p>
+              <div className="flex gap-2 flex-col">
+                {showTag ? (
+                  tags?.map((tagsItem) => (
+                    <p
+                      key={tagsItem}
+                      className="text_third bg-gray-200 px-2 py-1 rounded-md"
+                    >
+                      <span>#{tagsItem}</span>
+                    </p>
+                  ))
+                ) : (
+                  <>
+                    <p className="text_third bg-gray-200 px-2 py-1 rounded-md">
+                      <span>#{tags[0]}</span>
+                    </p>
+                  </>
+                )}
+                <span
+                  className="p-2 bg-gray-300 text-2xl rounded-sm w-10"
+                  onClick={() => setShowTag(!showTag)}
+                >
+                  {showTag ? <FaBox /> : <FaBoxOpen />}
+                </span>
+              </div>
             </div>
             <div className="flex items-center  lg:gap-8 gap-3">
               <div className="flex items-center gap-1 text-gray-500 text_brand_pri">

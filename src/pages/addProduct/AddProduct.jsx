@@ -1,73 +1,80 @@
-import { Option, Select, Textarea } from "@material-tailwind/react";
+import { Input, Textarea } from "@material-tailwind/react";
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { TagsInput } from "react-tag-input-component";
+import { toast, ToastContainer } from "react-toastify";
 import { imageUpload } from "../../api/utils";
 import Inp from "../../components/input/Inp";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 import useUserContext from "../../hooks/useUserContext";
 import Btn from "./../../components/button/Btn";
 
 const AddProduct = () => {
+  const [selected, setSelected] = React.useState([
+    "Software and Tools",
+    "Mobile Apps",
+    "Software",
+    "Web Applications",
+    "Ai",
+  ]);
+  const axiosCommon = useAxiosCommon();
   const navigate = useNavigate();
-  const location = useLocation();
   const { user } = useUserContext();
-  const [error, setError] = React.useState(null);
-  const [categories, setCategories] = React.useState("");
+
   const [product, setProduct] = React.useState({
     name: "",
     title: "",
-    category: "",
     description: "",
   });
   function handleChange(e) {
     setProduct({ ...product, [e.target.name]: e.target.value });
   }
-  const url = "https://blog-api-a11.vercel.app/blogposts";
+  const route = "/my-products";
+
   const currentDate = new Date().toLocaleDateString();
 
-  // handle the form
-  function handleCategoryChange(value) {
-    setCategories(value);
-  }
   async function handleSubmit(e) {
     e.preventDefault();
     // get image
     const imagFile = e.target.image.files[0];
 
-    setCategories("");
-    setError("");
-    const route = location?.state || "/";
-    if (categories === "") {
-      setError("Category filed is required");
-      return;
-    }
     // upload image
     try {
       const imageUrl = await imageUpload(imagFile);
-      const blogObj = {
+      const productObj = {
         user_name: user?.displayName,
         user_email: user?.email,
         profile_image: user?.photoURL,
         name: product?.name,
         title: product?.title,
         image: imageUrl,
-        category: categories,
+        tags: selected,
         description: product?.description,
         createdAt: currentDate,
       };
-      console.log(blogObj);
+      console.log(productObj);
+      await axiosCommon.post("/product/post", productObj);
+      toast.success("Product added", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      setTimeout(() => {
+        navigate(route);
+      }, 5000);
     } catch (error) {
-      console.log(error.message);
+      toast.success(error.message, {
+        position: "top-right",
+        autoClose: 3000,
+      });
     }
 
     setProduct({
       name: "",
       title: "",
-      category: "",
       description: "",
     });
-    setCategories("");
+
     e.target.reset();
   }
   return (
@@ -86,22 +93,45 @@ const AddProduct = () => {
           action="#"
         >
           {/* inputs  */}
+          <h1 className="mb-2 font-semibold">Your Name</h1>
+          <Input
+            disabled
+            type="text"
+            label={"Your Name"}
+            value={user?.displayName}
+            placeholder={"Your Name"}
+          />
+          <h1 className="mb-2 font-semibold">Your Email</h1>
+          <Input
+            disabled
+            type="text"
+            label={"Your Email"}
+            value={user?.email}
+            placeholder={"Your Email"}
+          />
+          <h1 className="mb-2 font-semibold">Your Photo</h1>
+          <Input
+            disabled
+            type="file"
+            placeholder="Your Photo"
+            name="your image"
+          />
           <Inp
             type="text"
             name={"name"}
             required={true}
             label={"Product Name"}
             value={product.name}
-            placeholder={"name"}
+            placeholder={"product name"}
             onChange={handleChange}
           />
           <Inp
             type="text"
             name={"title"}
             required={true}
-            label={"Title"}
+            label={"Product Title"}
             value={product.title}
-            placeholder={"title"}
+            placeholder={"product title"}
             onChange={handleChange}
           />
           {/* ===================== image upload start =================================> */}
@@ -122,28 +152,21 @@ const AddProduct = () => {
             onChange={handleChange}
             name="description"
           />
-          <Select
-            value={categories}
-            label="Select Category"
-            variant="standard"
-            onChange={handleCategoryChange}
-          >
-            <Option value="" disabled hidden>
-              Select a category
-            </Option>
-            <Option value="Web Applications">Web Applications</Option>
-            <Option value="AI and Machine Learning">
-              AI and Machine Learning
-            </Option>
-            <Option value="Mobile Applications">Mobile Applications</Option>
-            <Option value="Software and Tools">Software and Tools</Option>
-            <Option value="Games">Games</Option>
-            <Option value="Utilities">Utilities</Option>
-            <Option value="Productivity">Productivity</Option>
-            <Option value="Design and Creativity">Design and Creativity</Option>
-          </Select>
-          {/* error message */}
-          <span className="text-red-500">{error}</span>
+          {/* =================== tags start ========================= */}
+          {/* =================== tags start ========================= */}
+          <div className=" mb-4 ">
+            <h1 className="mb-2 font-semibold">Add Tags</h1>
+            <TagsInput
+              value={selected}
+              onChange={setSelected}
+              name="fruits"
+              placeHolder="enter tags..."
+            />
+            <em className="text_brand_pri">
+              press enter or comma to add new tag
+            </em>
+          </div>
+          {/* =================== tags start ========================= */}
           {/* submit button  */}
           <Btn type={"submit"} color="blue">
             {" "}
