@@ -7,6 +7,8 @@ import { Link, useParams } from "react-router-dom";
 import Btn from "../../components/button/Btn";
 import Spinner from "../../components/loadingSpinner/Spinner";
 import TinyProfile from "../../components/profile/tiny/TinyProfile";
+import PostProductReview from "../../components/reviews/postProductReview/PostProductReview";
+import ProductReviews from "../../components/reviews/productReviews/ProductReviews";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const ProductDetails = () => {
@@ -81,6 +83,7 @@ const ProductDetails = () => {
             </div>
             {/* =============== like end ========== */}
           </div>
+          {/* =================tags and report start ================ */}
           <div className="flex  justify-between items-center">
             {/* tags ============================= */}
             <div className="flex gap-2  my-4 flex-col">
@@ -99,6 +102,11 @@ const ProductDetails = () => {
               <span>Report</span> <MdReport />{" "}
             </Btn>
           </div>
+          {/* =================tags and report end ================ */}
+          {/*<<<<<<<<<<<<<<<<<<<<<<< Product Reviews section >>>>>>>>>>>>>>>>>>>>> */}
+          <ProductReviews />
+          {/*<<<<<<<<<<<<<<<<<<<<<<< Post Reviews section >>>>>>>>>>>>>>>>>>>>> */}
+          <PostProductReview />
         </div>
       </div>
     </div>
