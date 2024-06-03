@@ -5,20 +5,39 @@ import { BsFillHandIndexThumbFill } from "react-icons/bs";
 import { FaBox, FaBoxOpen } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import useUserContext from "../../hooks/useUserContext";
+import useAxiosSecure from "./../../hooks/useAxiosSecure";
 
 const Product = ({ product }) => {
   const { user } = useUserContext();
   const [showTag, setShowTag] = React.useState(false);
-
+  const axiosSecure = useAxiosSecure();
   const { _id, name, image, tags, title, user_email } = product;
 
   // handle vote click
-  function handleVoteClick() {
-    console.log("vote clicked");
+  async function handleVoteClick() {
+    try {
+      const voteObj = {
+        email: user.email,
+        blog_id: _id,
+        vote: 1,
+      };
+      await axiosSecure.post("/vote", voteObj);
+      toast.success("Voted", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    } catch (error) {
+      toast.error("You have voted", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    }
   }
   return (
     <div className="bg-gray-50 backdrop-blur-md rounded-md  shadow-sm border-2 hover:border-[#00a4e535] flex flex-col lg:flex-row gap-4">
+      <ToastContainer />
       <div className="p-4 ">
         <Link to={`/products/${_id}`}>
           <img
