@@ -1,14 +1,22 @@
+import { Button } from "@material-tailwind/react";
 import PropTypes from "prop-types";
 import React from "react";
 import { BsFillHandIndexThumbFill } from "react-icons/bs";
 import { FaBox, FaBoxOpen } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import Btn from "../button/Btn";
+import useUserContext from "../../hooks/useUserContext";
 
 const Product = ({ product }) => {
+  const { user } = useUserContext();
   const [showTag, setShowTag] = React.useState(false);
-  const { _id, name, image, tags, title } = product;
+
+  const { _id, name, image, tags, title, user_email } = product;
+
+  // handle vote click
+  function handleVoteClick() {
+    console.log("vote clicked");
+  }
   return (
     <div className="bg-gray-50 backdrop-blur-md rounded-md  shadow-sm border-2 hover:border-[#00a4e535] flex flex-col lg:flex-row gap-4">
       <div className="p-4 ">
@@ -46,7 +54,7 @@ const Product = ({ product }) => {
               </>
             )}
             <span
-              className="p-2 bg-gray-200 rounded-sm w-8"
+              className="p-2 bg-gray-200 rounded-sm font-semibold w-8"
               onClick={() => setShowTag(!showTag)}
             >
               {showTag ? <FaBox /> : <FaBoxOpen />}
@@ -59,10 +67,15 @@ const Product = ({ product }) => {
           </div>
           {/* vote icon  */}
           <div title="Vote">
-            <Btn size={"sm"} className={"flex items-center gap-2 text-xl"}>
+            <Button
+              disabled={user?.email === user_email}
+              onClick={handleVoteClick}
+              size={"sm"}
+              className={"flex bg_pri items-center gap-2 text-xl"}
+            >
               <span>10</span>
               <BsFillHandIndexThumbFill />
-            </Btn>
+            </Button>
           </div>
         </div>
       </div>
