@@ -49,6 +49,11 @@ const AddProduct = () => {
         name: product?.name,
         title: product?.title,
         image: imageUrl,
+        vote: {
+          users: [],
+          upVote: 0,
+          downVote: 0,
+        },
         tags: selected,
         description: product?.description,
         createdAt: currentDate,

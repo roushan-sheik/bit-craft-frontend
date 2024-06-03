@@ -1,16 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { BsFillHandIndexThumbFill } from "react-icons/bs";
-import { FaBox, FaBoxOpen } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
+import { MdReport } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import Btn from "../../components/button/Btn";
 import Spinner from "../../components/loadingSpinner/Spinner";
 import TinyProfile from "../../components/profile/tiny/TinyProfile";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
+
 const ProductDetails = () => {
   const axiosCommon = useAxiosCommon();
-  const [showTag, setShowTag] = React.useState(false);
+
   const { id } = useParams();
 
   const { data: products, isLoading } = useQuery({
@@ -21,7 +22,6 @@ const ProductDetails = () => {
     },
   });
   if (isLoading) return <Spinner />;
-
   const item = products && products.filter((product) => product._id === id);
   console.log(item);
   const {
@@ -34,16 +34,17 @@ const ProductDetails = () => {
     title,
     description,
     profile_image,
+    vote,
   } = item[0] || {};
   return (
-    <div>
+    <div className="main_ ">
       <TinyProfile
         createdAt={createdAt}
         user_email={user_email}
         user_name={user_name}
         profile_image={profile_image}
       />
-      <div className="bg-gray-50 pt-4 backdrop-blur-md rounded-md   flex flex-col lg:flex-row gap-4">
+      <div className=" pt-4 backdrop-blur-md rounded-md   flex flex-col lg:flex-row gap-4">
         <div className="p-4 ">
           <img
             className="lg:w-[400px] w-full h-[200px] lg:h-[400px]  "
@@ -63,44 +64,40 @@ const ProductDetails = () => {
               <Link to={-1}>
                 <Btn className={"bg_sec"}>Back</Btn>
               </Link>
-              <div className="flex gap-2 flex-col">
-                {showTag ? (
-                  tags?.map((tagsItem) => (
-                    <p
-                      key={tagsItem}
-                      className="text_third bg-gray-200 px-2 py-1 rounded-md"
-                    >
-                      <span>#{tagsItem}</span>
-                    </p>
-                  ))
-                ) : (
-                  <>
-                    <p className="text_third bg-gray-200 px-2 py-1 rounded-md">
-                      <span>#{tags[0]}</span>
-                    </p>
-                  </>
-                )}
-                <span
-                  className="p-2 bg-gray-300 text-2xl rounded-sm w-10"
-                  onClick={() => setShowTag(!showTag)}
-                >
-                  {showTag ? <FaBox /> : <FaBoxOpen />}
-                </span>
-              </div>
             </div>
+            {/* =============== like end ========== */}
             <div className="flex items-center  lg:gap-8 gap-3">
               <div className="flex items-center gap-1 text-gray-500 text_brand_pri">
                 <IoEyeOutline />
-                <span>145k</span>
+                <span>{vote.upVote + 3}</span>
               </div>
               {/* vote icon  */}
               <div title="Vote">
                 <Btn size={"sm"} className={"flex items-center gap-2 text-xl"}>
-                  <span>10</span>
+                  <span>{vote.upVote}</span>
                   <BsFillHandIndexThumbFill />
                 </Btn>
               </div>
             </div>
+            {/* =============== like end ========== */}
+          </div>
+          <div className="flex  justify-between items-center">
+            {/* tags ============================= */}
+            <div className="flex gap-2  my-4 flex-col">
+              {tags?.map((tagsItem) => (
+                <p
+                  key={tagsItem}
+                  className="text_third bg-gray-200 px-2 py-1 rounded-md"
+                >
+                  <span>#{tagsItem}</span>
+                </p>
+              ))}
+            </div>
+            {/* tags end ========================== */}
+            {/* report buttton  */}
+            <Btn className={"flex items-center gap-2 !bg-red-400"}>
+              <span>Report</span> <MdReport />{" "}
+            </Btn>
           </div>
         </div>
       </div>

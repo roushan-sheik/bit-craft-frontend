@@ -13,17 +13,18 @@ const Product = ({ product }) => {
   const { user } = useUserContext();
   const [showTag, setShowTag] = React.useState(false);
   const axiosSecure = useAxiosSecure();
-  const { _id, name, image, tags, title, user_email } = product;
+  const { _id, name, image, tags, title, user_email, vote } = product;
+  // get vote ===========================================
 
   // handle vote click
   async function handleVoteClick() {
     try {
-      const voteObj = {
-        email: user.email,
-        blog_id: _id,
-        vote: 1,
+      const upVoteObj = {
+        userEmail: user?.email,
+        upVote: 1,
+        downVote: 0,
       };
-      await axiosSecure.post("/vote", voteObj);
+      await axiosSecure.patch(`/update-vote/${_id}`, upVoteObj);
       toast.success("Voted", {
         position: "top-right",
         autoClose: 3000,
@@ -68,7 +69,7 @@ const Product = ({ product }) => {
             ) : (
               <>
                 <p className="text_third bg-gray-200 px-2 py-1 rounded-md">
-                  <span>#{tags[0]}</span>
+                  <span>#{tags && tags[0]}</span>
                 </p>
               </>
             )}
@@ -82,7 +83,7 @@ const Product = ({ product }) => {
 
           <div className="flex items-center gap-1 text-gray-500 text_brand_pri">
             <IoEyeOutline />
-            <span>145k</span>
+            <span>{vote.upVote + 3}</span>
           </div>
           {/* vote icon  */}
           <div title="Vote">
@@ -92,7 +93,7 @@ const Product = ({ product }) => {
               size={"sm"}
               className={"flex bg_pri items-center gap-2 text-xl"}
             >
-              <span>10</span>
+              <span>{vote.upVote}</span>
               <BsFillHandIndexThumbFill />
             </Button>
           </div>
