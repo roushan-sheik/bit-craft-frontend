@@ -25,8 +25,9 @@ const ProductDetails = () => {
   });
   if (isLoading) return <Spinner />;
   const item = products && products.filter((product) => product._id === id);
-  console.log(item);
+
   const {
+    _id,
     name,
     image,
     tags,
@@ -106,7 +107,7 @@ const ProductDetails = () => {
           {/*<<<<<<<<<<<<<<<<<<<<<<< Product Reviews section >>>>>>>>>>>>>>>>>>>>> */}
           <ProductReviews />
           {/*<<<<<<<<<<<<<<<<<<<<<<< Post Reviews section >>>>>>>>>>>>>>>>>>>>> */}
-          <PostProductReview />
+          <PostProductReview product_id={_id} />
         </div>
       </div>
     </div>

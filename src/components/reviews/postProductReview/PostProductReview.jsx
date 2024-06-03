@@ -1,8 +1,8 @@
 import React from "react";
 import Btn from "../../button/Btn";
 import ReviewModal from "../../shared/modal/ReviewModal";
-
-const PostProductReview = () => {
+import PropTypes from "prop-types";
+const PostProductReview = ({ product_id }) => {
   const [showReviwModal, setShowReviewModal] = React.useState(false);
   return (
     <div className="my-8">
@@ -10,6 +10,7 @@ const PostProductReview = () => {
         <ReviewModal
           closeModal={() => setShowReviewModal(false)}
           isOpen={showReviwModal}
+          product_id={product_id}
         />
       )}
       <Btn
@@ -22,5 +23,7 @@ const PostProductReview = () => {
     </div>
   );
 };
-
+PostProductReview.propTypes = {
+  product_id: PropTypes.string,
+};
 export default PostProductReview;

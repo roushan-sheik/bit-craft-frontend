@@ -12,7 +12,7 @@ import useUserContext from "../../../hooks/useUserContext";
 import Btn from "../../button/Btn";
 import Inp from "../../input/Inp";
 
-const ReviewModal = ({ closeModal, isOpen, modalHandler }) => {
+const ReviewModal = ({ closeModal, isOpen, modalHandler, product_id }) => {
   const [rated, setRated] = React.useState(4);
   const { user } = useUserContext();
   function handleSubmit(event) {
@@ -21,6 +21,7 @@ const ReviewModal = ({ closeModal, isOpen, modalHandler }) => {
     const reviewObj = {
       name: user?.displayName,
       image: user?.photoURL,
+      product_id,
       description: desc,
       rating: rated,
     };
@@ -107,6 +108,7 @@ const ReviewModal = ({ closeModal, isOpen, modalHandler }) => {
 ReviewModal.propTypes = {
   closeModal: PropTypes.func,
   isOpen: PropTypes.bool,
+  product_id: PropTypes.string,
   modalHandler: PropTypes.func,
 };
 
