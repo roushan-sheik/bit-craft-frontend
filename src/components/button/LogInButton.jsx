@@ -1,40 +1,38 @@
 // import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
-import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 import useUserContext from "../../hooks/useUserContext";
 
 function LogInButton({ userEmail }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { signinWithGoogle } = useUserContext();
+  const axiosCommon = useAxiosCommon();
+
   // google login
-  function handleGoogleLogin() {
-    signinWithGoogle()
-      .then((result) => {
-        // create a json web token
-        const userObj = { user: result.user.email };
-        // https://blog-api-a11.vercel.app/
-        // http://localhost:8000/jwt
-        axios
-          .post("http://localhost:8000/jwt", userObj, {
-            withCredentials: true,
-          })
-          .then((res) => {
-            console.log(res);
-            if (res.data.success) {
-              toast.success("Successfully logged in", {
-                position: "top-center",
-              });
-              setTimeout(() => {
-                navigate(location?.state || "/");
-              }, 3000);
-            }
-          });
-      })
-      .catch((err) => {
-        console.log(err.message);
+  async function handleGoogleLogin() {
+    try {
+      const result = await signinWithGoogle();
+
+      // create a json web token
+      const userObj = {
+        name: result.user.displayName,
+        email: result.user.email,
+        photo: result.user.photoURL,
+      };
+      await axiosCommon.post("/users/post", userObj);
+      toast.success("Successfully logged in", {
+        position: "top-center",
       });
+      setTimeout(() => {
+        navigate(location?.state || "/");
+      }, 3000);
+    } catch (error) {
+      toast.error("Something went wrong try again.. ", {
+        position: "top-center",
+      });
+    }
   }
 
   return (

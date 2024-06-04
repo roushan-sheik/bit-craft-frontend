@@ -1,14 +1,17 @@
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { imageUpload } from "../../api/utils";
 import Btn from "../../components/button/Btn";
 import Inp from "../../components/input/Inp";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 import useUserContext from "../../hooks/useUserContext";
 
 const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const axiosCommon = useAxiosCommon();
   const {
     createUser,
     signinWithGoogle,
@@ -32,13 +35,18 @@ const Register = () => {
       // console.log(image_url);
       //2. User Registration
       // console.log({ email, password });
-      const result = await createUser(email, password);
-      console.log(result);
-
+      await createUser(email, password);
+      // save user to the database
+      const userObj = {
+        name,
+        email,
+        image: image_url,
+      };
+      await axiosCommon.post("/users/post", userObj);
       // 3. Save username and photo in firebase
       await updateUserProfile(name, image_url);
       setLoading(false);
-      navigate("/");
+      navigate(location?.state || "/");
       toast.success("register Successful");
     } catch (err) {
       setLoading(false);

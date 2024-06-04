@@ -8,20 +8,43 @@ import {
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import useUserContext from "../../../hooks/useUserContext";
 import Btn from "../../button/Btn";
 import LogInButton from "../../button/LogInButton";
 import Inp from "../../input/Inp";
 
 const LoginModal = ({ closeModal, isOpen, modalHandler }) => {
   const [showPass, setShowPass] = React.useState(false);
-  function handleSubmit(event) {
+  const { loginUser } = useUserContext();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  async function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+    // Password should be minimum 8 characters
+    if (password.length < 8) {
+      toast.error("Password should be minimum 8 characters.", {
+        position: "top-center",
+      });
+      return;
+    }
     //TODO - login user
-    console.log({ email, password });
+    try {
+      await loginUser(email, password);
+      toast.success("Successfully logged in", {
+        position: "top-center",
+      });
+      setTimeout(() => {
+        navigate(location?.state || "/");
+      }, 3000);
+    } catch (error) {
+      console.log(error.message);
+    }
     // reset from
     form.email.value = "";
     form.password.value = "";
@@ -60,6 +83,7 @@ const LoginModal = ({ closeModal, isOpen, modalHandler }) => {
                   Login
                 </DialogTitle>
                 <form onSubmit={handleSubmit}>
+                  <ToastContainer />
                   <div className="mt-2">
                     <p className="text-lg  font-semibold">Email:</p>
                     <div className="w-full border-2 my-4 flex items-center">
