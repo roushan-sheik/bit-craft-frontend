@@ -1,31 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Spinner from "../../loadingSpinner/Spinner";
+
 import Title from "../../title/Title";
-import useAxiosSecure from "./../../../hooks/useAxiosSecure";
 // Import Swiper styles
 import { Rating } from "@material-tailwind/react";
 import "swiper/css";
 import "swiper/css/pagination";
-
 // import required modules
+import PropTypes from "prop-types";
 import { Pagination } from "swiper/modules";
-const ProductReviews = ({ blog_id }) => {
-  const axiosSecure = useAxiosSecure();
-  const {
-    data: reviews,
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["reviews"],
-    queryFn: async () => {
-      const { data } = await axiosSecure.get(`/reviews/${blog_id}`);
-      return data;
-    },
-  });
+import useFetchReview from "../../../hooks/dataFetching/useFetchReview";
+import MySpinner from "../../loadingSpinner/Spinner";
 
-  if (isLoading) return <Spinner />;
+const ProductReviews = ({ blog_id }) => {
+  const { isLoading, reviews } = useFetchReview(blog_id);
+
+  if (isLoading) return <MySpinner />;
   return (
     <div>
       <Title
@@ -102,6 +92,10 @@ const ProductReviews = ({ blog_id }) => {
       </Swiper>
     </div>
   );
+};
+
+ProductReviews.propTypes = {
+  blog_id: PropTypes.string,
 };
 
 export default ProductReviews;

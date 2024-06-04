@@ -27,5 +27,6 @@ const PostProductReview = ({ product_id, showReviewSuccess }) => {
 PostProductReview.propTypes = {
   product_id: PropTypes.string,
   showReviewSuccess: PropTypes.func,
+  postReview: PropTypes.func,
 };
 export default PostProductReview;

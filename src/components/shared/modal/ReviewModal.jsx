@@ -24,6 +24,7 @@ const ReviewModal = ({
   const [rated, setRated] = React.useState(4);
   const { user } = useUserContext();
   const axiosCommon = useAxiosCommon();
+  // const { refetch } = useFetchReview();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -46,9 +47,10 @@ const ReviewModal = ({
     //TODO - login user
     try {
       await axiosCommon.post("/review/post", reviewObj);
-      showReviewSuccess(true);
+      // refetch();
+      showReviewSuccess("success");
     } catch (error) {
-      showReviewSuccess(false);
+      showReviewSuccess("fail");
       console.log(error.message);
     }
 

@@ -6,7 +6,7 @@ import { MdReport } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import Btn from "../../components/button/Btn";
-import Spinner from "../../components/loadingSpinner/Spinner";
+import MySpinner from "../../components/loadingSpinner/Spinner";
 import TinyProfile from "../../components/profile/tiny/TinyProfile";
 import PostProductReview from "../../components/reviews/postProductReview/PostProductReview";
 import ProductReviews from "../../components/reviews/productReviews/ProductReviews";
@@ -18,21 +18,24 @@ const ProductDetails = () => {
   const { id } = useParams();
 
   const { data: products, isLoading } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["products-details"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(`/products/${id}`);
+      const { data } = await axiosCommon.get(`/product/details/${id}`);
       return data;
     },
   });
-  if (isLoading) return <Spinner />;
-  const item = products && products.filter((product) => product._id === id);
+  if (isLoading) {
+    return <MySpinner />;
+  }
+ 
+
   function showReviewSuccess(isSuccess) {
-    if (isSuccess) {
+    if (isSuccess === "success") {
       toast.success("Review added", {
         position: "top-right",
         autoClose: 5000,
       });
-    } else {
+    } else if (isSuccess === "fail") {
       toast.error("Something went wrong. Try again!! ", {
         position: "top-right",
         autoClose: 5000,
@@ -52,7 +55,7 @@ const ProductDetails = () => {
     description,
     profile_image,
     vote,
-  } = item[0] || {};
+  } = products;
   return (
     <div className="main_ ">
       <TinyProfile
