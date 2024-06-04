@@ -12,8 +12,12 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosCommon = useAxiosCommon();
-  const { createUser, updateUserProfile, loading, setLoading } =
-    useUserContext();
+  const {
+    createUser,
+    updateUserProfile,
+    loading,
+    setLoading,
+  } = useUserContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

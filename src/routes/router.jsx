@@ -13,6 +13,7 @@ import Profile from "../pages/profile/Profile";
 import Register from "../pages/register/Register";
 import UpdateProfile from "./../pages/updateProfile/UpdateProfile";
 import homeLoader from "./loader";
+import PrivateRoute from "./privet/PrivateRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,20 +27,36 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <Products />,
+        element: (
+          <PrivateRoute>
+            <Products />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/add-product",
-        element: <AddProduct />,
+        element: (
+          <PrivateRoute>
+            <AddProduct />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/products/:id",
-        element: <ProductDetails />,
+        element: (
+          <PrivateRoute>
+            <ProductDetails />,
+          </PrivateRoute>
+        ),
         loader: homeLoader,
       },
       {
         path: "/my-products",
-        element: <MyProducts />,
+        element: (
+          <PrivateRoute>
+            <MyProducts />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/news",
@@ -51,15 +68,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/my-profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoute>
+            <Profile />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/update-profile",
-        element: <UpdateProfile />,
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoute>
+            <Profile />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",

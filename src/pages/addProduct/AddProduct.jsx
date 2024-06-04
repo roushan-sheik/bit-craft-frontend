@@ -49,6 +49,7 @@ const AddProduct = () => {
         name: product?.name,
         title: product?.title,
         image: imageUrl,
+        status: "Pending",
         vote: {
           users: [],
           upVote: 0,

@@ -1,16 +1,13 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import MySpinner from "../../components/loadingSpinner/Spinner";
 import useUserContext from "../../hooks/useUserContext";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
   const { loading, user } = useUserContext();
   if (loading) {
-    return (
-      <div className="flex justify-center mt-14">
-        <p>Loading...</p>
-      </div>
-    );
+    return <MySpinner />;
   }
   if (user) {
     return children;
