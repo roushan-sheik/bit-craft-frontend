@@ -7,6 +7,7 @@ import useUserContext from "../../hooks/useUserContext";
 function LogInButton({ userEmail }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { updateUserProfile } = useUserContext();
   const { signinWithGoogle } = useUserContext();
   const axiosCommon = useAxiosCommon();
 
@@ -20,8 +21,12 @@ function LogInButton({ userEmail }) {
         name: result.user.displayName,
         email: result.user.email,
         photo: result.user.photoURL,
+        Role: "user",
+        status: "",
       };
       await axiosCommon.post("/users/post", userObj);
+      // update profile
+      await updateUserProfile(result.user.displayName, result.user.photoURL);
       toast.success("Successfully logged in", {
         position: "top-center",
       });

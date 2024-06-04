@@ -1,9 +1,9 @@
 import toast from "react-hot-toast";
-import { FcGoogle } from "react-icons/fc";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { imageUpload } from "../../api/utils";
 import Btn from "../../components/button/Btn";
+import LogInButton from "../../components/button/LogInButton";
 import Inp from "../../components/input/Inp";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import useUserContext from "../../hooks/useUserContext";
@@ -12,13 +12,8 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosCommon = useAxiosCommon();
-  const {
-    createUser,
-    signinWithGoogle,
-    updateUserProfile,
-    loading,
-    setLoading,
-  } = useUserContext();
+  const { createUser, updateUserProfile, loading, setLoading } =
+    useUserContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +36,8 @@ const Register = () => {
         name,
         email,
         image: image_url,
+        Role: "user",
+        status: "",
       };
       await axiosCommon.post("/users/post", userObj);
       // 3. Save username and photo in firebase
@@ -55,18 +52,6 @@ const Register = () => {
     }
   };
 
-  // handle google signin
-  const handleGoogleSignIn = async () => {
-    try {
-      await signinWithGoogle();
-
-      navigate("/");
-      toast.success("Signup Successful");
-    } catch (err) {
-      console.log(err);
-      toast.error(err.message);
-    }
-  };
   return (
     <div className="flex  justify-center items-center mt-6 min-h-screen">
       <div className="flex flex-col max-w-md p-4 w-[90%]  rounded-md sm:p-10 border-2  text-gray-900">
@@ -159,15 +144,9 @@ const Register = () => {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <button
-          disabled={loading}
-          onClick={handleGoogleSignIn}
-          className="disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
-        >
-          <FcGoogle size={32} />
-
-          <p>Continue with Google</p>
-        </button>
+        <div className="flex justify-center my-3">
+          <LogInButton />
+        </div>
         <p className="px-6 text-sm text-center text-gray-400">
           Already have an account?{" "}
           <Link
