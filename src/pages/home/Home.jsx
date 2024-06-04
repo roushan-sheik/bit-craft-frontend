@@ -2,6 +2,7 @@ import React from "react";
 import FeaturedProducts from "../../components/featuredProducts/FeaturedProducts";
 import BannerSlider from "../../components/slider/BannerSlider";
 import Title from "../../components/title/Title";
+import TrendingProducts from "../../components/trendingProducts/TrendingProducts";
 
 const Home = () => {
   return (
@@ -18,8 +19,10 @@ const Home = () => {
             "Explore a platform where tech enthusiasts can discover, review, and share cutting-edge products like web apps, AI tools, software, games, and mobile apps. Stay ahead of the curve by finding the latest innovations in technology and connect with a community of like-minded individuals."
           }
         />
-        {/* featured products  */}
+        {/* featured products section */}
         <FeaturedProducts />
+        {/* Trending Products Section */}
+        <TrendingProducts />
       </section>
     </main>
   );

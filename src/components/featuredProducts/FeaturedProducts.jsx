@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
-import Spinner from "../loadingSpinner/Spinner";
+import MySpinner from "../loadingSpinner/Spinner";
 import Product from "./Product";
 const FeaturedProducts = () => {
   const axiosCommon = useAxiosCommon();
@@ -13,8 +13,8 @@ const FeaturedProducts = () => {
       return data;
     },
   });
-  if (isLoading) return <Spinner />;
- 
+  if (isLoading) return <MySpinner />;
+
   return (
     <>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-6">
