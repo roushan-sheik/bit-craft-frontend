@@ -8,14 +8,24 @@ import {
 import { Rating } from "@material-tailwind/react";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import useAxiosCommon from "../../../hooks/useAxiosCommon";
 import useUserContext from "../../../hooks/useUserContext";
 import Btn from "../../button/Btn";
 import Inp from "../../input/Inp";
 
-const ReviewModal = ({ closeModal, isOpen, modalHandler, product_id }) => {
+const ReviewModal = ({
+  closeModal,
+  isOpen,
+  modalHandler,
+  product_id,
+  showReviewSuccess,
+}) => {
   const [rated, setRated] = React.useState(4);
   const { user } = useUserContext();
-  function handleSubmit(event) {
+  const axiosCommon = useAxiosCommon();
+
+  async function handleSubmit(event) {
     event.preventDefault();
     const desc = event.target.description.value;
     const reviewObj = {
@@ -25,9 +35,22 @@ const ReviewModal = ({ closeModal, isOpen, modalHandler, product_id }) => {
       description: desc,
       rating: rated,
     };
+    if (reviewObj.description === "" || reviewObj.description.length < 15) {
+      toast.error("Review must be more than 15 characters", {
+        position: "top-right",
+        autoClose: 5000,
+      });
+      return;
+    }
 
     //TODO - login user
-    console.log(reviewObj);
+    try {
+      await axiosCommon.post("/review/post", reviewObj);
+      showReviewSuccess(true);
+    } catch (error) {
+      showReviewSuccess(false);
+      console.log(error.message);
+    }
 
     // reset from
     event.target.description.value = "";
@@ -47,6 +70,7 @@ const ReviewModal = ({ closeModal, isOpen, modalHandler, product_id }) => {
         >
           <div className="fixed inset-0 bg-black bg-opacity-25" />
         </TransitionChild>
+        <ToastContainer />
 
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
@@ -110,6 +134,7 @@ ReviewModal.propTypes = {
   isOpen: PropTypes.bool,
   product_id: PropTypes.string,
   modalHandler: PropTypes.func,
+  showReviewSuccess: PropTypes.func,
 };
 
 export default ReviewModal;

@@ -14,7 +14,7 @@ const FeaturedProducts = () => {
     },
   });
   if (isLoading) return <Spinner />;
-  console.log(products);
+ 
   return (
     <>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-6">

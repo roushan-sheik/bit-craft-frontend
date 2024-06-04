@@ -4,6 +4,7 @@ import { BsFillHandIndexThumbFill } from "react-icons/bs";
 import { IoEyeOutline } from "react-icons/io5";
 import { MdReport } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import Btn from "../../components/button/Btn";
 import Spinner from "../../components/loadingSpinner/Spinner";
 import TinyProfile from "../../components/profile/tiny/TinyProfile";
@@ -25,6 +26,19 @@ const ProductDetails = () => {
   });
   if (isLoading) return <Spinner />;
   const item = products && products.filter((product) => product._id === id);
+  function showReviewSuccess(isSuccess) {
+    if (isSuccess) {
+      toast.success("Review added", {
+        position: "top-right",
+        autoClose: 5000,
+      });
+    } else {
+      toast.error("Something went wrong. Try again!! ", {
+        position: "top-right",
+        autoClose: 5000,
+      });
+    }
+  }
 
   const {
     _id,
@@ -104,12 +118,17 @@ const ProductDetails = () => {
             </Btn>
           </div>
           {/* =================tags and report end ================ */}
-          {/*<<<<<<<<<<<<<<<<<<<<<<< Product Reviews section >>>>>>>>>>>>>>>>>>>>> */}
-          <ProductReviews />
+
+          <ToastContainer />
           {/*<<<<<<<<<<<<<<<<<<<<<<< Post Reviews section >>>>>>>>>>>>>>>>>>>>> */}
-          <PostProductReview product_id={_id} />
+          <PostProductReview
+            product_id={_id}
+            showReviewSuccess={showReviewSuccess}
+          />
         </div>
       </div>
+      {/*<<<<<<<<<<<<<<<<<<<<<<< Product Reviews section >>>>>>>>>>>>>>>>>>>>> */}
+      <ProductReviews blog_id={_id} />
     </div>
   );
 };
