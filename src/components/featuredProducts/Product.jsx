@@ -83,7 +83,7 @@ const Product = ({ product }) => {
 
           <div className="flex items-center gap-1 text-gray-500 text_brand_pri">
             <IoEyeOutline />
-            <span>{vote.upVote + 3}</span>
+            <span>{vote?.upVote + 3}</span>
           </div>
           {/* vote icon  */}
           <div title="Vote">

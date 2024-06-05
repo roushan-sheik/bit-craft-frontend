@@ -2,6 +2,7 @@ import { Typography } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { MdDeleteForever, MdEditSquare } from "react-icons/md";
+import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import MySpinner from "../../components/loadingSpinner/Spinner";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -26,10 +27,6 @@ const MyProducts = () => {
   });
   if (isLoading) return <MySpinner />;
 
-  // Updata product
-  async function handleUpdate(id) {
-    console.log("Update id: ", id);
-  }
   // Delete  product
   async function handleDelete(id) {
     var result = confirm("Want to delete?");
@@ -82,48 +79,70 @@ const MyProducts = () => {
               </div>
             </div>
             <div className="">
-              {products.map(({ name, vote, status, _id }) => {
-                return (
-                  <div
-                    key={name}
-                    className="border-b   border-blue-gray-100 flex bg-blue-gray-50 p-4"
-                  >
-                    <div className="flex  justify-start flex-1 items-center">
-                      <p>{name}</p>
-                    </div>
-                    <div className="flex  justify-start ml-6 lg:ml-8 flex-1 items-center">
-                      <p>{vote.upVote}</p>
-                    </div>
-                    <div className="flex  justify-start flex-1 items-center">
-                      <p
-                        className={`${
-                          status === "Pending"
-                            ? "bg-yellow-700 py-1 px-2 rounded-md"
-                            : "bg-green-500 rounded-md py-1 px-2"
-                        }`}
+              {products.map(
+                ({
+                  name,
+                  image,
+                  title,
+                  tags,
+                  description,
+                  vote,
+                  status,
+                  _id,
+                }) => {
+                  return (
+                    <div
+                      key={name}
+                      className="border-b   border-blue-gray-100 flex bg-blue-gray-50 p-4"
+                    >
+                      <div className="flex  justify-start flex-1 items-center">
+                        <p>{name}</p>
+                      </div>
+                      <div className="flex  justify-start ml-6 lg:ml-8 flex-1 items-center">
+                        <p>{vote.upVote}</p>
+                      </div>
+                      <div className="flex  justify-start flex-1 items-center">
+                        <p
+                          className={`${
+                            status === "Pending"
+                              ? "bg-yellow-700 py-1 px-2 rounded-md"
+                              : "bg-green-500 rounded-md py-1 px-2"
+                          }`}
+                        >
+                          {status}
+                        </p>
+                      </div>
+                      <div className="flex lg:ml-4 ml-6 cursor-pointer  flex-1 items-center gap-1 text_brand_pri">
+                        <Link
+                          to={"/update-product"}
+                          state={{
+                            id: _id,
+                            name,
+                            image,
+                            title,
+                            tags,
+                            description,
+                          }}
+                        >
+                          <div className="flex items-center gap-1">
+                            <span className="lg:flex hidden">
+                              <MdEditSquare />
+                            </span>
+                            <span>Edit</span>
+                          </div>
+                        </Link>
+                      </div>
+                      <div
+                        onClick={() => handleDelete(_id)}
+                        className="flex flex-1 mr-2 cursor-pointer items-center gap-1 text-red-500"
                       >
-                        {status}
-                      </p>
+                        <MdDeleteForever className="lg:flex hidden" />
+                        <span>Delete</span>
+                      </div>
                     </div>
-                    <div
-                      onClick={() => handleUpdate(_id)}
-                      className="flex lg:ml-4 ml-6 cursor-pointer  flex-1 items-center gap-1 text_brand_pri"
-                    >
-                      <span className="lg:flex hidden">
-                        <MdEditSquare />
-                      </span>
-                      <span>Edit</span>
-                    </div>
-                    <div
-                      onClick={() => handleDelete(_id)}
-                      className="flex flex-1 mr-2 cursor-pointer items-center gap-1 text-red-500"
-                    >
-                      <MdDeleteForever className="lg:flex hidden" />
-                      <span>Delete</span>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                }
+              )}
             </div>
           </div>
         </div>

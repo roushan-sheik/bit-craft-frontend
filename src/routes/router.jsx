@@ -11,6 +11,7 @@ import ProductDetails from "../pages/productDetails/ProductDetails";
 import Products from "../pages/products/Products";
 import Profile from "../pages/profile/Profile";
 import Register from "../pages/register/Register";
+import UpdateProduct from "../pages/updateProduct/UpdateProduct";
 import UpdateProfile from "./../pages/updateProfile/UpdateProfile";
 import homeLoader from "./loader";
 import PrivateRoute from "./privet/PrivateRoute";
@@ -38,6 +39,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddProduct />,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-product",
+        element: (
+          <PrivateRoute>
+            <UpdateProduct />,
           </PrivateRoute>
         ),
       },
