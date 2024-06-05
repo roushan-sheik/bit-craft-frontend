@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Dashboard from "../layout/Dashboard";
 import Root from "../layout/Root";
 import AddProduct from "../pages/addProduct/AddProduct";
 import Community from "../pages/community/Community";
@@ -76,36 +77,39 @@ const router = createBrowserRouter([
         element: <Community />,
       },
       {
-        path: "/my-profile",
-        element: (
-          <PrivateRoute>
-            <Profile />,
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/update-profile",
-        element: (
-          <PrivateRoute>
-            <UpdateProfile />,
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/my-profile",
-        element: (
-          <PrivateRoute>
-            <Profile />,
-          </PrivateRoute>
-        ),
-      },
-      {
         path: "/login",
         element: <Login />,
       },
       {
         path: "/register",
         element: <Register />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />,
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "my-profile",
+        element: (
+          <PrivateRoute>
+            <Profile />,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "update-profile",
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />,
+          </PrivateRoute>
+        ),
       },
     ],
   },
