@@ -46,7 +46,7 @@ const Header = () => {
           <LoginModal isOpen={showForm} closeModal={() => setShowForm(false)} />
         )}
         {showInfo && user && (
-          <div className="z-50 bg-gray-200 absolute top-[70px] w-[250px] right-[5px] p-4 rounded-md">
+          <div className="z-50 bg-white absolute top-[70px] w-[250px] right-[5px] p-4 rounded-md">
             {/* cancel icon box  */}
             <span
               onClick={() => setShowInfo(!showInfo)}

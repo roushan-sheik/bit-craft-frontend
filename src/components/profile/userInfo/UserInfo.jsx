@@ -1,8 +1,8 @@
 import React from "react";
+import { RxDashboard } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import useUserContext from "../../../hooks/useUserContext";
 import Btn from "../../button/Btn";
-import MobileNav from "../../nav/mobile/MobileNav";
 
 const UserInfo = () => {
   const { user, loading, logoutUser } = useUserContext();
@@ -15,22 +15,14 @@ const UserInfo = () => {
       <p className="text-xl mt-2 font-semibold select-none cursor-auto ">
         {user?.displayName}
       </p>
-      <p className="text-lg text_sec my-1 font-medium cursor-text">
-        {user?.email}
-      </p>
-      {/* Mobile nav menu  */}
-      <div className="flex flex-col gap-2 lg:hidden">
-        <MobileNav />
-      </div>
+
       {/* My profile   */}
-      <Link to={"/my-profile"}>
-        <p className="text-lg cursor-pointer font-medium my-2 hover:text-[#fd6b22]">
-          My Profile
-        </p>
-      </Link>
-      <Link to={"/update-profile"}>
-        <p className="text-lg cursor-pointer font-medium my-2 hover:text-[#fd6b22]">
-          Update Profile
+      <Link to={"/dashboard"}>
+        <p className=" bg-blue-gray-100 flex items-center gap-1 p-2 rounded-md lg:text-lg text-base cursor-pointer font-medium mb-2 mt-5 hover:text-[#fd6b22]">
+          <RxDashboard />
+          {/* <AiFillDashboard /> */}
+
+          <span>Dashboard</span>
         </p>
       </Link>
 
