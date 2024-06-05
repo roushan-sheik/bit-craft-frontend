@@ -114,7 +114,7 @@ const MyProducts = () => {
                       </div>
                       <div className="flex lg:ml-4 ml-6 cursor-pointer  flex-1 items-center gap-1 text_brand_pri">
                         <Link
-                          to={"/update-product"}
+                          to={"/dashboard/update-product"}
                           state={{
                             id: _id,
                             name,

@@ -89,7 +89,7 @@ const AddProduct = () => {
         <Helmet>
           <title>BitCraft | Add Product</title>
         </Helmet>
-        <h2 className=" text_pri lg:text-4xl text-2xl lg:my-10 my-7 font-bold text-center">
+        <h2 className=" text_pri lg:text-3xl text-2xl lg:my-10 my-4 font-bold text-center">
           Add Product
         </h2>
         <ToastContainer />
@@ -174,7 +174,7 @@ const AddProduct = () => {
           </div>
           {/* =================== tags start ========================= */}
           {/* submit button  */}
-          <Btn type={"submit"} color="blue">
+          <Btn className={"mb-10"} type={"submit"} color="blue">
             {" "}
             Continue
           </Btn>

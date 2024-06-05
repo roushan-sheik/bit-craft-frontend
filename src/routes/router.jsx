@@ -36,22 +36,6 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/add-product",
-        element: (
-          <PrivateRoute>
-            <AddProduct />,
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/update-product",
-        element: (
-          <PrivateRoute>
-            <UpdateProduct />,
-          </PrivateRoute>
-        ),
-      },
-      {
         path: "/products/:id",
         element: (
           <PrivateRoute>
@@ -60,14 +44,7 @@ const router = createBrowserRouter([
         ),
         loader: homeLoader,
       },
-      {
-        path: "/my-products",
-        element: (
-          <PrivateRoute>
-            <MyProducts />,
-          </PrivateRoute>
-        ),
-      },
+
       {
         path: "/news",
         element: <News />,
@@ -90,26 +67,30 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <Dashboard />,
+        <Dashboard />
       </PrivateRoute>
     ),
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "add-product",
+        element: <AddProduct />,
+      },
+      {
+        path: "update-product",
+        element:  <UpdateProduct />,
+      },
+      {
+        path: "my-products",
+        element:<MyProducts />,
+      },
+      {
         path: "my-profile",
-        element: (
-          <PrivateRoute>
-            <Profile />,
-          </PrivateRoute>
-        ),
+        element: <Profile />,
       },
       {
         path: "update-profile",
-        element: (
-          <PrivateRoute>
-            <UpdateProfile />,
-          </PrivateRoute>
-        ),
+        element:<UpdateProfile />,
       },
     ],
   },

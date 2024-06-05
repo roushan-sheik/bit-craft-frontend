@@ -172,7 +172,7 @@ const UpdateProduct = () => {
           </div>
           {/* =================== tags start ========================= */}
           {/* submit button  */}
-          <Btn type={"submit"} color="blue">
+          <Btn className={"mb-10"} type={"submit"} color="blue">
             {" "}
             Continue to Update
           </Btn>
