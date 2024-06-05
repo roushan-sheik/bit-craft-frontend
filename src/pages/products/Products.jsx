@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import MySpinner from "../../components/loadingSpinner/Spinner";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import SingleProduct from "./SingleProduct";
 const Products = () => {
   const [searchInput, setSearchInput] = React.useState("");
 
@@ -9,12 +10,19 @@ const Products = () => {
   // handler
   function handleSearchChange(event) {
     setSearchInput(event.target.value);
+    refetch();
   }
 
-  const { data: products, isLoading } = useQuery({
+  const {
+    data: products,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["accepted-products"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/products/accepted`);
+      const { data } = await axiosSecure.get(
+        `/products/accepted/${searchInput}`
+      );
       return data;
     },
   });
@@ -23,7 +31,7 @@ const Products = () => {
 
   // click handler <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   async function handleInputSearchClick() {
-    console.log("search");
+    refetch();
   }
 
   return (
@@ -52,7 +60,12 @@ const Products = () => {
             </button>
           </div>
         </div>
-        {/* // recent blogs */}
+        {/* //================== Pagination products ========================== */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          {products?.map((product) => (
+            <SingleProduct key={product._id} product={product} />
+          ))}
+        </div>
       </div>
     </div>
   );
