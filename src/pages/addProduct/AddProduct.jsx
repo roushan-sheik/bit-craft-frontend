@@ -63,15 +63,15 @@ const AddProduct = () => {
       await axiosCommon.post("/product/post", productObj);
       toast.success("Product added", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
       });
       setTimeout(() => {
         navigate(route);
-      }, 5000);
+      }, 2000);
     } catch (error) {
       toast.error(error.message, {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
       });
     }
 

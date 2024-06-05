@@ -52,7 +52,7 @@ const MyProducts = () => {
     <div className="lg:w-[90%] mx-auto">
       <div>
         <h2 className="lg:text-3xl text-xl font-bold text-center lg:mt-10 mt-4">
-          My Products {products.length}
+          My Products ({products.length})
         </h2>
         <ToastContainer />
       </div>
