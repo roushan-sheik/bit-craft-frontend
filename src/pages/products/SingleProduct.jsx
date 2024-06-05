@@ -8,7 +8,7 @@ import useUserContext from "../../hooks/useUserContext";
 const SingleProduct = ({ product }) => {
   const { user } = useUserContext();
   const [showTag, setShowTag] = React.useState(false);
-  console.log(product);
+
   const {
     _id,
     name,

@@ -27,7 +27,7 @@ const Products = () => {
     },
   });
   if (isLoading) return <MySpinner />;
-  console.log(products);
+ 
 
   // click handler <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   async function handleInputSearchClick() {
