@@ -69,7 +69,7 @@ const AddProduct = () => {
         navigate(route);
       }, 5000);
     } catch (error) {
-      toast.success(error.message, {
+      toast.error(error.message, {
         position: "top-right",
         autoClose: 3000,
       });

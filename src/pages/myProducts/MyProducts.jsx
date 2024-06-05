@@ -2,6 +2,7 @@ import { Typography } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { MdDeleteForever, MdEditSquare } from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
 import MySpinner from "../../components/loadingSpinner/Spinner";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useUserContext from "../../hooks/useUserContext";
@@ -11,35 +12,12 @@ const MyProducts = () => {
   const axiosSecure = useAxiosSecure();
 
   const TABLE_HEAD = ["Product Name", "Votes", "Status", "Update", "Delete"];
-  const TABLE_ROWS = [
-    {
-      name: "John Michael",
-      job: "Manager",
-      date: "23/04/18",
-    },
-    {
-      name: "Alexa Liras",
-      job: "Developer",
-      date: "23/04/18",
-    },
-    {
-      name: "Laurent Perrier",
-      job: "Executive",
-      date: "19/09/17",
-    },
-    {
-      name: "Michael Levi",
-      job: "Developer",
-      date: "24/12/08",
-    },
-    {
-      name: "Richard Gran",
-      job: "Manager",
-      date: "04/10/21",
-    },
-  ];
 
-  const { data: products, isLoading } = useQuery({
+  const {
+    data: products,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["accepted-products"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/products/my/${user.email}`);
@@ -48,12 +26,38 @@ const MyProducts = () => {
   });
   if (isLoading) return <MySpinner />;
 
+  // Updata product
+  async function handleUpdate(id) {
+    console.log("Update id: ", id);
+  }
+  // Delete  product
+  async function handleDelete(id) {
+    var result = confirm("Want to delete?");
+    try {
+      if (result) {
+        await axiosSecure.delete(`/product/delete/${id}`);
+        refetch();
+        toast.success("Successfully Deleted", {
+          position: "top-right",
+          autoClose: 4000,
+        });
+      } else {
+        return;
+      }
+    } catch (error) {
+      toast.error("Could not deleted try again", {
+        position: "top-right",
+        autoClose: 4000,
+      });
+    }
+  }
   return (
     <div className="lg:w-[90%] mx-auto">
       <div>
         <h2 className="lg:text-3xl text-xl font-bold text-center lg:mt-10 mt-4">
           My Products {products.length}
         </h2>
+        <ToastContainer />
       </div>
       {/* products table  */}
       <div className="mt-8 ">
@@ -78,7 +82,7 @@ const MyProducts = () => {
               </div>
             </div>
             <div className="">
-              {products.map(({ name, vote, status }, index) => {
+              {products.map(({ name, vote, status, _id }) => {
                 return (
                   <div
                     key={name}
@@ -101,13 +105,19 @@ const MyProducts = () => {
                         {status}
                       </p>
                     </div>
-                    <div className="flex lg:ml-4 ml-6  flex-1 items-center gap-1 text_brand_pri">
+                    <div
+                      onClick={() => handleUpdate(_id)}
+                      className="flex lg:ml-4 ml-6 cursor-pointer  flex-1 items-center gap-1 text_brand_pri"
+                    >
                       <span className="lg:flex hidden">
                         <MdEditSquare />
                       </span>
                       <span>Edit</span>
                     </div>
-                    <div className="flex flex-1 mr-2 items-center gap-1 text-red-500">
+                    <div
+                      onClick={() => handleDelete(_id)}
+                      className="flex flex-1 mr-2 cursor-pointer items-center gap-1 text-red-500"
+                    >
                       <MdDeleteForever className="lg:flex hidden" />
                       <span>Delete</span>
                     </div>
