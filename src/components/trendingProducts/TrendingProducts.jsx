@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { Link } from "react-router-dom";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
+import Btn from "../button/Btn";
 import MySpinner from "../loadingSpinner/Spinner";
 import Title from "../title/Title";
 import TProduct from "./TProduct";
@@ -28,6 +30,11 @@ const TrendingProducts = () => {
         {products?.map((product) => (
           <TProduct key={product._id} product={product} />
         ))}
+      </div>
+      <div className="flex justify-center my-10">
+        <Link to={"/products"}>
+          <Btn>Show All Products</Btn>
+        </Link>
       </div>
     </div>
   );

@@ -1,12 +1,17 @@
 import { Typography } from "@material-tailwind/react";
 import { SITEMAP } from "../../../constants/footer";
+import Logo from "../../logo/Logo";
 const currentYear = new Date().getFullYear();
 
 function Footer() {
   return (
     <div className=" bg-blue-gray-100">
       <footer className="relative w-[90%] mx-auto  mt-32">
-        <div className="mx-auto w-full max-w-7xl px-8">
+        <div className="mx-auto w-full  max-w-7xl px-8">
+          <div className="">
+            <Logo />
+            <h2 className="font-semibold">Stay With Us</h2>
+          </div>
           <div className="mx-auto grid w-full grid-cols-1 gap-8 lg:py-20 py-10 md:grid-cols-2 lg:grid-cols-4">
             {SITEMAP.map(({ title, links }, key) => (
               <div key={key} className="w-full">
