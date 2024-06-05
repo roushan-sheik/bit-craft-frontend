@@ -10,8 +10,8 @@ import useUserContext from "../../hooks/useUserContext";
 
 const MyProducts = () => {
   const { user } = useUserContext();
-  const axiosSecure = useAxiosSecure();
 
+  const axiosSecure = useAxiosSecure();
   const TABLE_HEAD = ["Product Name", "Votes", "Status", "Update", "Delete"];
 
   const {
@@ -19,7 +19,7 @@ const MyProducts = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["accepted-products"],
+    queryKey: ["my-products"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/products/my/${user.email}`);
       return data;

@@ -2,8 +2,10 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import MobileSidebar from "../components/sidebar/MobileSidebar";
 import Sidebar from "../components/sidebar/Sidebar";
-
+import useSubscribe from "../hooks/useSubscribe";
 const Dashboard = () => {
+  const [status] = useSubscribe();
+  console.log(status);
   return (
     <main className="bg-gray-100 min-h-screen">
       <div className="flex ">
