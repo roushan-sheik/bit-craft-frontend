@@ -35,7 +35,7 @@ const MyProducts = () => {
     var result = confirm("Want to delete?");
     try {
       if (result) {
-        await axiosSecure.delete(`/product/delete/${id}`);
+        await axiosSecure.delete(`/product/delete/${id}?email=${user.email}`);
         refetch();
         toast.success("Successfully Deleted", {
           position: "top-right",
