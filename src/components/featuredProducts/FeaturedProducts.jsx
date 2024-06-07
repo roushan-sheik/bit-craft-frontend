@@ -9,7 +9,7 @@ const FeaturedProducts = () => {
   const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(`/products`);
+      const { data } = await axiosCommon.get(`/products/featured`);
       return data;
     },
   });

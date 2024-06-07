@@ -3,6 +3,7 @@ import React from "react";
 import { FcAcceptDatabase, FcViewDetails } from "react-icons/fc";
 import { ImCancelCircle } from "react-icons/im";
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
+import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import MySpinner from "../../../components/loadingSpinner/Spinner";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -24,8 +25,13 @@ const ProductReviewQueue = () => {
       return data;
     },
   });
-  console.log(products);
+
   if (isLoading) return <MySpinner />;
+
+  async function handleFeaturedClick() {}
+  async function handleRejectClick() {}
+  async function handleAcceptClick() {}
+
   return (
     <div className="lg:w-[90%] mx-auto">
       <div>
@@ -50,66 +56,59 @@ const ProductReviewQueue = () => {
               </div>
             </div>
             <div className="">
-              {products.map(
-                ({
-                  name,
-                  image,
-                  title,
-                  tags,
-                  description,
-                  vote,
-                  status,
-                  _id,
-                }) => {
-                  return (
-                    <div
-                      key={name}
-                      className="border-b gap-4 flex-1 justify-between border-blue-gray-100 flex bg-blue-gray-50 p-4"
-                    >
-                      <div className="flex-1 h-14">{name}</div>
-
+              {products.map(({ name, _id }) => {
+                return (
+                  <div
+                    key={name}
+                    className="border-b gap-4 flex-1 justify-between border-blue-gray-100 flex bg-blue-gray-50 p-4"
+                  >
+                    <div className="flex-1 h-14">{name}</div>
+                    <Link to={`/products/${_id}`}>
                       <div
                         size={"sm"}
                         className={
-                          "flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg_pri"
+                          "flex-1 px-3 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg_pri"
                         }
                       >
                         <FcViewDetails />
                         <span>Details</span>
                       </div>
-                      <div
-                        size={"sm"}
-                        className={
-                          "flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg_sec"
-                        }
-                      >
-                        <MdOutlineFeaturedPlayList />
+                    </Link>
+                    <div
+                      onClick={handleFeaturedClick}
+                      size={"sm"}
+                      className={
+                        "flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg_sec"
+                      }
+                    >
+                      <MdOutlineFeaturedPlayList />
 
-                        <span>Featured</span>
-                      </div>
-                      <div
-                        size={"sm"}
-                        className={
-                          "flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg-green-600"
-                        }
-                      >
-                        <FcAcceptDatabase />
-                        <span>Accept</span>
-                      </div>
-                      <div
-                        size={"sm"}
-                        className={
-                          "flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg-red-600"
-                        }
-                      >
-                        <ImCancelCircle />
-
-                        <span>Reject</span>
-                      </div>
+                      <span>Featured</span>
                     </div>
-                  );
-                }
-              )}
+                    <div
+                      onClick={handleAcceptClick}
+                      size={"sm"}
+                      className={
+                        "flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg-green-600"
+                      }
+                    >
+                      <FcAcceptDatabase />
+                      <span>Accept</span>
+                    </div>
+                    <div
+                      onClick={handleRejectClick}
+                      size={"sm"}
+                      className={
+                        "flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg-red-600"
+                      }
+                    >
+                      <ImCancelCircle />
+
+                      <span>Reject</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -56,6 +56,7 @@ const AddProduct = () => {
           downVote: 0,
         },
         tags: selected,
+        featured: false,
         description: product?.description,
         createdAt: currentDate,
       };
