@@ -10,7 +10,7 @@ import LinkRoute from "../dashboardLink/LinkRoute";
 
 const Sidebar = () => {
   const role = useRole();
-  console.log("User role is", role);
+
   return (
     <div className="bg-white min-h-screen fixed lg:w-80 md:w-64 flex flex-col gap-4 p-10">
       <Link to={"/dashboard"}>
