@@ -1,8 +1,15 @@
 import { Helmet } from "react-helmet-async";
+import { MdCardMembership } from "react-icons/md";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
+import useSubscribe from "../../hooks/useSubscribe";
 import useUserContext from "../../hooks/useUserContext";
 
 const Profile = () => {
   const { user } = useUserContext();
+
+  const [status] = useSubscribe();
+  console.log(status);
+  let amount = 200;
   return (
     <div className="max-w-6xl mx-auto ">
       <Helmet>
@@ -14,8 +21,26 @@ const Profile = () => {
           src={user?.photoURL || "https://i.ibb.co/6JyZF0K/user.png"}
           alt="pic"
         />
-        <h2 className="mt-10 font-medium text-4xl">{user?.displayName}</h2>
+        <h2 className="mt-6 font-medium text-4xl">{user?.displayName}</h2>
         <p className="text-lg mt-3">{user?.email}</p>
+        <div className="flex items-center gap-3 my-3">
+          <div className="flex items-center  text-lg gap-1 font-medium">
+            <MdCardMembership />
+            <span>Membership Status:</span>
+          </div>
+          <div className="">
+            {status ? (
+              <div className="flex items-center text-lg gap-1 text_brand_pri select-none">
+                <RiVerifiedBadgeFill />
+                <span>Verified</span>
+              </div>
+            ) : (
+              <span className="p-2 bg_sec rounded-md cursor-pointer text-white">
+                ${amount}
+              </span>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

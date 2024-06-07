@@ -6,6 +6,7 @@ import Community from "../pages/community/Community";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
+import ProductReviewQueue from "../pages/ModeratorDashboard/productReviewQueue/ProductReviewQueue";
 import MyProducts from "../pages/myProducts/MyProducts";
 import News from "../pages/news/News";
 import ProductDetails from "../pages/productDetails/ProductDetails";
@@ -78,11 +79,11 @@ const router = createBrowserRouter([
       },
       {
         path: "update-product",
-        element:  <UpdateProduct />,
+        element: <UpdateProduct />,
       },
       {
         path: "my-products",
-        element:<MyProducts />,
+        element: <MyProducts />,
       },
       {
         path: "my-profile",
@@ -90,7 +91,15 @@ const router = createBrowserRouter([
       },
       {
         path: "update-profile",
-        element:<UpdateProfile />,
+        element: <UpdateProfile />,
+      },
+      {
+        path: "product-review-queue",
+        element: <ProductReviewQueue />,
+      },
+      {
+        path: "reported-contents",
+        element: <ProductReviewQueue />,
       },
     ],
   },
