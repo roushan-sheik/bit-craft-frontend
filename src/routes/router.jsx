@@ -6,6 +6,8 @@ import Community from "../pages/community/Community";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
+import ManageCoupons from "../pages/manageCoupons/ManageCoupons";
+import ManageUsers from "../pages/manageUsers/ManageUsers";
 import ProductReviewQueue from "../pages/ModeratorDashboard/productReviewQueue/ProductReviewQueue";
 import ReportedContents from "../pages/ModeratorDashboard/reportedContents/ReportedContents";
 import MyProducts from "../pages/myProducts/MyProducts";
@@ -14,6 +16,7 @@ import ProductDetails from "../pages/productDetails/ProductDetails";
 import Products from "../pages/products/Products";
 import Profile from "../pages/profile/Profile";
 import Register from "../pages/register/Register";
+import StatisticsPage from "../pages/statisticsPage/StatisticsPage";
 import UpdateProduct from "../pages/updateProduct/UpdateProduct";
 import UpdateProfile from "./../pages/updateProfile/UpdateProfile";
 import homeLoader from "./loader";
@@ -101,6 +104,18 @@ const router = createBrowserRouter([
       {
         path: "reported-contents",
         element: <ReportedContents />,
+      },
+      {
+        path: "statistics",
+        element: <StatisticsPage />,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers />,
+      },
+      {
+        path: "manage-coupons",
+        element: <ManageCoupons />,
       },
     ],
   },

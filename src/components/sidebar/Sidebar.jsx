@@ -1,5 +1,7 @@
 import React from "react";
-import { FaRegUser } from "react-icons/fa";
+import { FaIdCard, FaRegUser } from "react-icons/fa";
+import { FaUsersGear } from "react-icons/fa6";
+import { FcStatistics } from "react-icons/fc";
 import { IoBagAddOutline } from "react-icons/io5";
 import { MdPostAdd, MdReport } from "react-icons/md";
 import { PiQueueFill } from "react-icons/pi";
@@ -33,6 +35,28 @@ const Sidebar = () => {
           label={"Product Queue"}
           route={"product-review-queue"}
           icon={PiQueueFill}
+        />
+      )}
+
+      {role === "Admin" && (
+        <LinkRoute
+          label={"Statistics Page"}
+          route={"statistics"}
+          icon={FcStatistics}
+        />
+      )}
+      {role === "Admin" && (
+        <LinkRoute
+          label={"Manage Users"}
+          route={"manage-users"}
+          icon={FaUsersGear}
+        />
+      )}
+      {role === "Admin" && (
+        <LinkRoute
+          label={"Manage Coupons"}
+          route={"manage-coupons"}
+          icon={FaIdCard}
         />
       )}
       {role === ("Admin" || "Moderator") && (
