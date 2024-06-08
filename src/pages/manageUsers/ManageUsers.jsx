@@ -91,7 +91,7 @@ const ManageUsers = () => {
               <div className="flex w-full">
                 <div className="border-b font-bold gap-4 flex-1 justify-between border-blue-gray-100 flex bg-blue-gray-50 p-4">
                   <div className="flex-1">User Name</div>
-                  <div className="flex-1">User Email</div>
+                  <div className="flex-1 hidden lg:flex">User Email</div>
                   <div className="flex-1">Make Moderator</div>
                   <div className="flex-1">Make Admin</div>
                 </div>
@@ -105,7 +105,7 @@ const ManageUsers = () => {
                     className="border-b gap-4 flex-1 justify-between border-blue-gray-100 flex bg-blue-gray-50 p-4"
                   >
                     <div className="flex-1 h-14">{name}</div>
-                    <div className="flex-1 overflow-scroll lg:w-[150px]">
+                    <div className="flex-1 hidden lg:flex overflow-scroll lg:w-[150px]">
                       {email}
                     </div>
 
@@ -116,7 +116,9 @@ const ManageUsers = () => {
                   `}
                     >
                       <MdAddModerator className="text-2xl text_brand_sec" />
-                      <span className="text_brand_sec">Moderator</span>
+                      <span className="text_brand_sec hidden lg:flex">
+                        Moderator
+                      </span>
                       {Role === "Moderator" && (
                         <IoMdDoneAll className="text_brand_sec text-xl" />
                       )}
@@ -128,7 +130,7 @@ const ManageUsers = () => {
                   `}
                     >
                       <MdAdminPanelSettings className="text-3xl" />
-                      <span>Admin</span>
+                      <span className=" hidden lg:flex">Admin</span>
                       {Role === "Admin" && <IoMdDoneAll className="text-xl" />}
                     </button>
                   </div>

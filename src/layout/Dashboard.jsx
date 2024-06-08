@@ -10,7 +10,7 @@ const Dashboard = () => {
     <main className="bg-gray-100 min-h-screen">
       <div className="flex ">
         {/* Dashboard sidebar  */}
-        <div className="basis-[30%]">
+        <div className="lg:basis-[30%]">
           {/* desktop sidebar  */}
           <div className="flex lg:hidden">
             <MobileSidebar />
@@ -20,7 +20,7 @@ const Dashboard = () => {
           </div>
         </div>
         {/* Dashboard content  */}
-        <div className="basis-[70%]">{<Outlet />}</div>
+        <div className="lg:basis-[70%] basis-[100%]">{<Outlet />}</div>
       </div>
     </main>
   );

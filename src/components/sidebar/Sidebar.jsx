@@ -2,7 +2,7 @@ import React from "react";
 import { FaIdCard, FaRegUser } from "react-icons/fa";
 import { FaUsersGear } from "react-icons/fa6";
 import { FcStatistics } from "react-icons/fc";
-import { IoBagAddOutline } from "react-icons/io5";
+import { IoBagAddOutline, IoHomeOutline } from "react-icons/io5";
 import { MdPostAdd, MdReport } from "react-icons/md";
 import { PiQueueFill } from "react-icons/pi";
 import { RxDashboard } from "react-icons/rx";
@@ -13,7 +13,6 @@ import LinkRoute from "../dashboardLink/LinkRoute";
 
 const Sidebar = () => {
   const role = useRole();
- 
 
   return (
     <div className="bg-white min-h-screen fixed lg:w-80 md:w-64 flex flex-col gap-4 p-10">
@@ -23,7 +22,7 @@ const Sidebar = () => {
           <span>Dashboard</span>
         </div>
       </Link>
-
+      <LinkRoute label={"Go Home"} route={"/"} icon={IoHomeOutline} />
       <LinkRoute label={"My Profile"} route={"my-profile"} icon={FaRegUser} />
       <LinkRoute label={"Add Product"} route={"add-product"} icon={MdPostAdd} />
       <LinkRoute
