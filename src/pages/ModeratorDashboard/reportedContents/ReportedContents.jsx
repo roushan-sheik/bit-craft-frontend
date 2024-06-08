@@ -5,6 +5,7 @@ import { ImCancelCircle } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import MySpinner from "../../../components/loadingSpinner/Spinner";
+import NoDataFound from "../../../components/not-found/NoDataFound";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUserContext from "../../../hooks/useUserContext";
 
@@ -18,7 +19,7 @@ const ReportedContents = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["my-products"],
+    queryKey: ["reported-products"],
     queryFn: async () => {
       const { data } = await axiosSecure(`/reports`);
       return data;
@@ -26,7 +27,9 @@ const ReportedContents = () => {
   });
 
   if (isLoading) return <MySpinner />;
-
+  if (products.length === 0) {
+    return <NoDataFound title={"Don't found any reported product "} />;
+  }
   async function handleDeleteClick(id, product_id) {
     try {
       const userConfirmed = confirm("Do you want to Delete this Product?");

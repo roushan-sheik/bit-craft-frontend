@@ -5,6 +5,7 @@ import { MdDeleteForever, MdEditSquare } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import MySpinner from "../../components/loadingSpinner/Spinner";
+import NoDataFound from "../../components/not-found/NoDataFound";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useUserContext from "../../hooks/useUserContext";
 
@@ -27,6 +28,9 @@ const MyProducts = () => {
   });
   if (isLoading) return <MySpinner />;
 
+  if (products.length === 0) {
+    return <NoDataFound title={"You Don't have any  product "} />;
+  }
   // Delete  product
   async function handleDelete(id) {
     var result = confirm("Want to delete?");

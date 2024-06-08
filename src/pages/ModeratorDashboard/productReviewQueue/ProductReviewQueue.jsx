@@ -6,6 +6,7 @@ import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import MySpinner from "../../../components/loadingSpinner/Spinner";
+import NoDataFound from "../../../components/not-found/NoDataFound";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUserContext from "../../../hooks/useUserContext";
 
@@ -19,7 +20,7 @@ const ProductReviewQueue = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["my-products"],
+    queryKey: ["reported-review-queue"],
     queryFn: async () => {
       const { data } = await axiosSecure(`/products/pending`);
       return data;
@@ -27,6 +28,9 @@ const ProductReviewQueue = () => {
   });
 
   if (isLoading) return <MySpinner />;
+  if (products.length === 0) {
+    return <NoDataFound title={"Don't found any Queue product "} />;
+  }
 
   async function handleFeaturedClick(id) {
     try {
