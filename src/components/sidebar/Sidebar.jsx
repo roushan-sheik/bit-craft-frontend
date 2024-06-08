@@ -13,6 +13,7 @@ import LinkRoute from "../dashboardLink/LinkRoute";
 
 const Sidebar = () => {
   const role = useRole();
+ 
 
   return (
     <div className="bg-white min-h-screen fixed lg:w-80 md:w-64 flex flex-col gap-4 p-10">
@@ -30,7 +31,7 @@ const Sidebar = () => {
         route={"my-products"}
         icon={IoBagAddOutline}
       />
-      {role === ("Admin" || "Moderator") && (
+      {role === ("Moderator" || "Admin") && (
         <LinkRoute
           label={"Product Queue"}
           route={"product-review-queue"}
@@ -59,7 +60,7 @@ const Sidebar = () => {
           icon={FaIdCard}
         />
       )}
-      {role === ("Admin" || "Moderator") && (
+      {role === ("Moderator" || "Admin") && (
         <LinkRoute
           label={"Reported Contents"}
           route={"reported-contents"}
