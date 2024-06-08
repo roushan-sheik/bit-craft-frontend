@@ -1,48 +1,58 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import { Cell, Legend, Pie, PieChart } from "recharts";
+import { axiosSecure } from "../../hooks/useAxiosSecure";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-];
+const StatisticsPage = () => {
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  const { data: chartData = [] } = useQuery({
+    queryKey: ["admin-statistic"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/admin/statistic");
+      return res.data;
+    },
+  });
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  // custom shape for the pie chart
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
+
+  const pieChartData = chartData.map((data) => {
+    return { name: data.name, value: data.value };
+  });
 
   return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
-
-function StatisticsPage() {
-  return (
-    <ResponsiveContainer width="100%" height="100%">
-      <PieChart width={500} height={500}>
+    <div>
+      <h2 className=" text-center lg:text-3xl text-2xl mt-10 font-semibold">
+        Admin Statistics
+      </h2>
+      <PieChart width={400} height={400}>
         <Pie
-          data={data}
+          data={pieChartData}
           cx="50%"
           cy="50%"
           labelLine={false}
@@ -51,12 +61,14 @@ function StatisticsPage() {
           fill="#8884d8"
           dataKey="value"
         >
-          {data.map((entry, index) => (
+          {pieChartData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
+        <Legend></Legend>
       </PieChart>
-    </ResponsiveContainer>
+    </div>
   );
-}
+};
+
 export default StatisticsPage;

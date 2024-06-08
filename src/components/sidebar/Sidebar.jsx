@@ -8,7 +8,6 @@ import { PiQueueFill } from "react-icons/pi";
 import { RxDashboard } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import useRole from "../../hooks/useRole";
-import Btn from "../button/Btn";
 import LinkRoute from "../dashboardLink/LinkRoute";
 
 const Sidebar = () => {
@@ -66,9 +65,6 @@ const Sidebar = () => {
           icon={MdReport}
         />
       )}
-      <Link to={"/"}>
-        <Btn>Go Home</Btn>
-      </Link>
     </div>
   );
 };
