@@ -10,9 +10,11 @@ import MySpinner from "../../components/loadingSpinner/Spinner";
 import TinyProfile from "../../components/profile/tiny/TinyProfile";
 import PostProductReview from "../../components/reviews/postProductReview/PostProductReview";
 import ProductReviews from "../../components/reviews/productReviews/ProductReviews";
+import ReportModal from "../../components/shared/modal/ReportModal";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const ProductDetails = () => {
+  const [showReport, setShowReport] = React.useState(false);
   const axiosCommon = useAxiosCommon();
 
   const { id } = useParams();
@@ -27,7 +29,6 @@ const ProductDetails = () => {
   if (isLoading) {
     return <MySpinner />;
   }
- 
 
   function showReviewSuccess(isSuccess) {
     if (isSuccess === "success") {
@@ -39,6 +40,19 @@ const ProductDetails = () => {
       toast.error("Something went wrong. Try again!! ", {
         position: "top-right",
         autoClose: 5000,
+      });
+    }
+  }
+  function showReportSuccess(isSuccess) {
+    if (isSuccess === "success") {
+      toast.success("Report added", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    } else if (isSuccess === "fail") {
+      toast.error("Something went wrong. Try again!! ", {
+        position: "top-right",
+        autoClose: 2000,
       });
     }
   }
@@ -56,6 +70,10 @@ const ProductDetails = () => {
     profile_image,
     vote,
   } = products;
+  function handleReportClick() {
+    setShowReport(!showReport);
+  }
+
   return (
     <div className="main_ ">
       <TinyProfile
@@ -72,6 +90,16 @@ const ProductDetails = () => {
             alt=""
           />
         </div>
+        {/* report modal  */}
+        {showReport && (
+          <ReportModal
+            closeModal={handleReportClick}
+            isOpen={showReport}
+            product_id={_id}
+            product_name={name}
+            showReportSuccess={showReportSuccess}
+          />
+        )}
         {/* content box  */}
         <div title="Go To Products details page" className="p-4 basis-[60%]">
           <h2 className="text-2xl font-semibold">{name}</h2>
@@ -116,7 +144,10 @@ const ProductDetails = () => {
             </div>
             {/* tags end ========================== */}
             {/* report buttton  */}
-            <Btn className={"flex items-center gap-2 !bg-red-400"}>
+            <Btn
+              onClick={handleReportClick}
+              className={"flex items-center gap-2 !bg-red-400"}
+            >
               <span>Report</span> <MdReport />{" "}
             </Btn>
           </div>
