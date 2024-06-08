@@ -4,7 +4,7 @@ import { FcAcceptDatabase, FcViewDetails } from "react-icons/fc";
 import { ImCancelCircle } from "react-icons/im";
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import MySpinner from "../../../components/loadingSpinner/Spinner";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUserContext from "../../../hooks/useUserContext";
@@ -28,9 +28,63 @@ const ProductReviewQueue = () => {
 
   if (isLoading) return <MySpinner />;
 
-  async function handleFeaturedClick() {}
-  async function handleRejectClick() {}
-  async function handleAcceptClick() {}
+  async function handleFeaturedClick(id) {
+    try {
+      await axiosSecure.put(`/products/update/featured/${id}`, {
+        featured: true,
+      });
+      refetch();
+      toast.success("Featured Successful", {
+        position: "top-right",
+        autoClose: 1000,
+      });
+    } catch (error) {
+      toast.error(error.message, { position: "top-right", autoClose: 1000 });
+    }
+  }
+  async function cancelFeatured(id) {
+    try {
+      await axiosSecure.put(`/products/update/featured/${id}`, {
+        featured: false,
+      });
+      refetch();
+
+      toast.success("Cancel Featured ", {
+        position: "top-right",
+        autoClose: 1000,
+      });
+    } catch (error) {
+      toast.error(error.message, { position: "top-right", autoClose: 1000 });
+    }
+  }
+  async function handleRejectClick(id) {
+    try {
+      await axiosSecure.put(`/product/update/status/${id}`, {
+        status: "Rejected",
+      });
+      refetch();
+      toast.success("Rejected Successful", {
+        position: "top-right",
+        autoClose: 1000,
+      });
+    } catch (error) {
+      toast.error(error.message, { position: "top-right", autoClose: 1000 });
+    }
+  }
+  async function handleAcceptClick(id) {
+    try {
+      await axiosSecure.put(`/product/update/status/${id}`, {
+        status: "Accepted",
+      });
+      refetch();
+      toast.success("Accepted Successful", {
+        position: "top-right",
+        autoClose: 1000,
+      });
+    } catch (error) {
+      toast.error(error.message, { position: "top-right", autoClose: 1000 });
+    }
+  }
 
   return (
     <div className="lg:w-[90%] mx-auto">
@@ -56,7 +110,7 @@ const ProductReviewQueue = () => {
               </div>
             </div>
             <div className="">
-              {products.map(({ name, _id }) => {
+              {products.map(({ name, _id, featured, status }) => {
                 return (
                   <div
                     key={name}
@@ -75,37 +129,46 @@ const ProductReviewQueue = () => {
                       </div>
                     </Link>
                     <div
-                      onClick={handleFeaturedClick}
+                      onClick={() => {
+                        if (featured === true) {
+                          cancelFeatured(_id);
+                          return;
+                        }
+                        handleFeaturedClick(_id);
+                      }}
                       size={"sm"}
-                      className={
-                        "flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg_sec"
-                      }
+                      className={`flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white  ${
+                        featured ? "bg-red-500" : "bg-green-700"
+                      }`}
                     >
                       <MdOutlineFeaturedPlayList />
 
-                      <span>Featured</span>
+                      <span>{featured ? "Cancel" : "Featured"}</span>
                     </div>
-                    <div
-                      onClick={handleAcceptClick}
+
+                    <button
+                      disabled={status === "Accepted"}
+                      onClick={() => handleAcceptClick(_id)}
                       size={"sm"}
-                      className={
-                        "flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg-green-600"
-                      }
+                      className={`flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white disabled:bg-gray-500 bg-green-500 ${
+                        status === "Accepted" && "disabled:bg-gray-500"
+                      }`}
                     >
                       <FcAcceptDatabase />
                       <span>Accept</span>
-                    </div>
-                    <div
-                      onClick={handleRejectClick}
+                    </button>
+                    <button
+                      disabled={status === "Rejected"}
+                      onClick={() => handleRejectClick(_id)}
                       size={"sm"}
-                      className={
-                        "flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg-red-600"
-                      }
+                      className={`flex-1 flex items-center gap-1 justify-center h-8 cursor-pointer text-white bg-red-600 ${
+                        status === "Rejected" && "disabled:bg-gray-500"
+                      }`}
                     >
                       <ImCancelCircle />
 
                       <span>Reject</span>
-                    </div>
+                    </button>
                   </div>
                 );
               })}
