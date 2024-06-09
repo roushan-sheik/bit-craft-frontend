@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify";
 import Btn from "../../button/Btn";
 import Inp from "../../input/Inp";
 
-const CouponModal = ({ closeModal, isOpen, modalHandler }) => {
+const CouponModal = ({ closeModal, isOpen, modalHandler, getCouponData }) => {
   const [couponCode, setCouponCode] = useState(""); // Properly initialize useState
   const [expiryDate, setExpiryDate] = useState(""); // State for expiry date
   const [discountAmount, setDiscountAmount] = useState(""); // State for discount amount
@@ -42,7 +42,7 @@ const CouponModal = ({ closeModal, isOpen, modalHandler }) => {
       discountAmount,
     };
     //TODO - TODO
-    console.log(couponObj);
+    getCouponData(couponObj);
 
     // Reset form
     event.target.description.value = "";
@@ -104,7 +104,7 @@ const CouponModal = ({ closeModal, isOpen, modalHandler }) => {
                         inputStyle={"border-none"}
                         value={couponCode}
                         placeholder={"Coupon code"}
-                        readOnly // Make the input read-only
+                        readOnly={true} // Make the input read-only
                       />
                       <span
                         onClick={handleGenerateCoupon}
@@ -170,6 +170,7 @@ CouponModal.propTypes = {
   product_id: PropTypes.string,
   modalHandler: PropTypes.func,
   product_name: PropTypes.string,
+  getCouponData: PropTypes.func,
   showReportSuccess: PropTypes.func,
 };
 

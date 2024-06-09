@@ -13,6 +13,7 @@ const Inp = ({
   required,
   disabled,
   boxStyle,
+  readOnly,
   accept,
 }) => {
   return (
@@ -33,6 +34,7 @@ const Inp = ({
         accept={accept}
         className={`rounded-lg border border-gray-300 bg-transparent px-4 py-2 text-[#1B8EF8] focus:outline-none ${inputStyle} `}
         type={type}
+        readOnly={readOnly}
       />
     </div>
   );
