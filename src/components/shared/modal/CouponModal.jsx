@@ -6,69 +6,52 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import useAxiosCommon from "../../../hooks/useAxiosCommon";
-import useUserContext from "../../../hooks/useUserContext";
+import React, { Fragment, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import Btn from "../../button/Btn";
 import Inp from "../../input/Inp";
 
-const CouponModal = ({
-  closeModal,
-  isOpen,
-  modalHandler,
-  product_id,
-  product_name,
-  showReportSuccess,
-}) => {
-  const { couponCode, setCouponCode } = React.useState("");
-  const { user } = useUserContext();
-  const axiosCommon = useAxiosCommon();
-  // const { refetch } = useFetchReview();
-  // coupon code generator
-  let Code = "";
-  function generateCouponCode() {
+const CouponModal = ({ closeModal, isOpen, modalHandler }) => {
+  const [couponCode, setCouponCode] = useState(""); // Properly initialize useState
+  const [expiryDate, setExpiryDate] = useState(""); // State for expiry date
+  const [discountAmount, setDiscountAmount] = useState(""); // State for discount amount
+
+  // Function to generate a 6-digit alphanumeric coupon code
+  const generateCouponCode = () => {
+    let code = "";
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     for (let i = 0; i < 6; i++) {
       const randomIndex = Math.floor(Math.random() * characters.length);
-      Code += characters[randomIndex];
+      code += characters[randomIndex];
     }
+    setCouponCode(code); // Set the generated code to the state
+  };
+
+  function handleGenerateCoupon() {
+    generateCouponCode();
+    console.log(couponCode);
   }
-  console.log(Code);
-  generateCouponCode();
 
   async function handleSubmit(event) {
     event.preventDefault();
     const desc = event.target.description.value;
-    const reportObj = {
-      name: user?.displayName,
-      image: user?.photoURL,
-      product_id,
-      product_name,
+    const couponObj = {
       description: desc,
+      code: couponCode,
+      expiryDate,
+      discountAmount,
     };
-    if (reportObj.description === "" || reportObj.description.length < 15) {
-      toast.error("Report must be more than 15 characters", {
-        position: "top-right",
-        autoClose: 1000,
-      });
-      return;
-    }
+    //TODO - TODO
+    console.log(couponObj);
 
-    //TODO - login user
-    try {
-      await axiosCommon.post("/report", reportObj);
-      // refetch();
-      showReportSuccess("success");
-    } catch (error) {
-      showReportSuccess("fail");
-      console.log(error.message);
-    }
-
-    // reset from
+    // Reset form
     event.target.description.value = "";
+    setCouponCode(""); // Reset the coupon code
+    setExpiryDate(""); // Reset the expiry date
+    setDiscountAmount(""); // Reset the discount amount
     closeModal();
   }
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -105,28 +88,59 @@ const CouponModal = ({
                 </DialogTitle>
                 <form onSubmit={handleSubmit}>
                   <div className="mt-8">
-                    <p className="text-lg  ">Report Description:</p>
+                    <p className="text-lg">Report Description:</p>
                     <div className="w-full border-2 my-4 flex items-center">
                       <Inp
-                        inputStyle={"border-none "}
+                        inputStyle={"border-none"}
                         placeholder={"Coupon Description...."}
                         name={"description"}
                       />
                     </div>
                   </div>
                   <div className="mt-8">
-                    <p className="text-lg  ">Coupon Code:</p>
+                    <p className="text-lg">Coupon Code:</p>
                     <div className="w-full border-2 my-4 flex items-center">
                       <Inp
-                        inputStyle={"border-none "}
+                        inputStyle={"border-none"}
+                        value={couponCode}
                         placeholder={"Coupon code"}
-                        name={"description"}
+                        readOnly // Make the input read-only
+                      />
+                      <span
+                        onClick={handleGenerateCoupon}
+                        className="cursor-pointer ml-4 text-blue-500"
+                      >
+                        Generate code
+                      </span>
+                    </div>
+                  </div>
+                  <div className="mt-8">
+                    <p className="text-lg">Expiry Date:</p>
+                    <div className="w-full border-2 my-4 flex items-center">
+                      <input
+                        type="date"
+                        className="border-none w-full"
+                        value={expiryDate}
+                        onChange={(e) => setExpiryDate(e.target.value)}
                       />
                     </div>
-                    <span>Generate</span>
                   </div>
-                  <hr className="mt-8 " />
-                  <div className="flex  justify-around">
+                  <div className="mt-8">
+                    <p className="text-lg">Discount Amount (%):</p>
+                    <div className="w-full border-2 my-4 flex items-center">
+                      <input
+                        type="number"
+                        className="border-none w-full focus:outline-none"
+                        placeholder="Discount amount"
+                        value={discountAmount}
+                        onChange={(e) => setDiscountAmount(e.target.value)}
+                        min="0"
+                        max="100"
+                      />
+                    </div>
+                  </div>
+                  <hr className="mt-8" />
+                  <div className="flex justify-around">
                     <Btn
                       className="w-[150px]"
                       type="submit"
@@ -135,7 +149,7 @@ const CouponModal = ({
                     />
                     <Btn
                       label={"Cancel"}
-                      className="w-[150px] !bg-[#fd6b22] "
+                      className="w-[150px] !bg-[#fd6b22]"
                       type="button"
                       onClick={closeModal}
                     />
@@ -151,8 +165,8 @@ const CouponModal = ({
 };
 
 CouponModal.propTypes = {
-  closeModal: PropTypes.func,
-  isOpen: PropTypes.bool,
+  closeModal: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   product_id: PropTypes.string,
   modalHandler: PropTypes.func,
   product_name: PropTypes.string,
