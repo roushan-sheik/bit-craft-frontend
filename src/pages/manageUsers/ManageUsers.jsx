@@ -19,7 +19,7 @@ const ManageUsers = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["manage-users"],
+    queryKey: ["manage-users", user.email],
     queryFn: async () => {
       const { data } = await axiosSecure(`/users`);
       return data;
@@ -101,7 +101,7 @@ const ManageUsers = () => {
               {users.map(({ name, email, Role }) => {
                 return (
                   <div
-                    key={name}
+                    key={email}
                     className="border-b gap-4 flex-1 justify-between border-blue-gray-100 flex bg-blue-gray-50 p-4"
                   >
                     <div className="flex-1 h-14">{name}</div>

@@ -13,6 +13,8 @@ import Btn from "../button/Btn";
 import LinkRoute from "../dashboardLink/LinkRoute";
 
 function MobileSidebar() {
+  const Admin = "Admin";
+  const Moderator = "Moderator";
   const role = useRole();
   const [open, setOpen] = React.useState(true);
   const openDrawer = () => setOpen(true);
@@ -66,7 +68,7 @@ function MobileSidebar() {
             route={"my-products"}
             icon={IoBagAddOutline}
           />
-          {role === ("Moderator" || "Admin") && (
+          {(role === Admin || Moderator) && (
             <LinkRoute
               label={"Product Queue"}
               route={"product-review-queue"}
@@ -88,7 +90,7 @@ function MobileSidebar() {
               icon={FaUsersGear}
             />
           )}
-          {role === "Admin" && (
+          {(role === Admin || Moderator) && (
             <LinkRoute
               label={"Manage Coupons"}
               route={"manage-coupons"}
@@ -102,45 +104,6 @@ function MobileSidebar() {
               icon={MdReport}
             />
           )}
-          <Link to={"/"}>
-            <div>
-              {role === ("Moderator" || "Admin") && (
-                <LinkRoute
-                  label={"Product Queue"}
-                  route={"product-review-queue"}
-                  icon={PiQueueFill}
-                />
-              )}
-              {role === "Admin" && (
-                <LinkRoute
-                  label={"Statistics Page"}
-                  route={"statistics"}
-                  icon={FcStatistics}
-                />
-              )}
-              {role === "Admin" && (
-                <LinkRoute
-                  label={"Manage Users"}
-                  route={"manage-users"}
-                  icon={FaUsersGear}
-                />
-              )}
-              {role === "Admin" && (
-                <LinkRoute
-                  label={"Manage Coupons"}
-                  route={"manage-coupons"}
-                  icon={FaIdCard}
-                />
-              )}
-              {role === ("Moderator" || "Admin") && (
-                <LinkRoute
-                  label={"Reported Contents"}
-                  route={"reported-contents"}
-                  icon={MdReport}
-                />
-              )}
-            </div>
-          </Link>
         </List>
       </Drawer>
     </React.Fragment>
