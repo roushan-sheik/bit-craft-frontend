@@ -1,6 +1,9 @@
 import { Helmet } from "react-helmet-async";
+import { FaUserEdit } from "react-icons/fa";
 import { MdCardMembership } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import Btn from "../../components/button/Btn";
 import useSubscribe from "../../hooks/useSubscribe";
 import useUserContext from "../../hooks/useUserContext";
 
@@ -41,6 +44,12 @@ const Profile = () => {
             )}
           </div>
         </div>
+        <Link to={"/dashboard/update-profile"}>
+          <Btn className={"flex items-center gap-2 mt-2"}>
+            <FaUserEdit />
+            Edit
+          </Btn>
+        </Link>
       </div>
     </div>
   );

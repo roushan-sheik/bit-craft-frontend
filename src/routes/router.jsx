@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardHome from "../components/dashboardHome/DashboardHome";
 import Dashboard from "../layout/Dashboard";
 import Root from "../layout/Root";
 import AddProduct from "../pages/addProduct/AddProduct";
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/dashboard",
+        element: <DashboardHome />,
+      },
       {
         path: "add-product",
         element: <AddProduct />,
