@@ -1,6 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { toast, ToastContainer } from "react-toastify";
 import Btn from "../../components/button/Btn";
+import Coupon from "../../components/coupon/Coupon";
+import MySpinner from "../../components/loadingSpinner/Spinner";
 import CouponModal from "../../components/shared/modal/CouponModal";
 import { axiosSecure } from "./../../hooks/useAxiosSecure";
 
@@ -20,10 +23,27 @@ const ManageCoupons = () => {
       });
     }
   }
+  const {
+    data: coupons,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["my-coupons"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/coupons`);
+      return data;
+    },
+  });
+  if (isLoading) return <MySpinner />;
 
   return (
     <div>
-      <h2>ManageCoupons</h2>
+      <div className="flex my-8 justify-between mr-4">
+        <h2 className="text-2xl lg:text-4xl text-center font-semibold ">
+          Manage Coupons
+        </h2>
+        <Btn onClick={() => setShowModal(!showModal)}>Add Coupon</Btn>
+      </div>
       <ToastContainer />
       {/* modal  */}
       {showModal && (
@@ -33,7 +53,11 @@ const ManageCoupons = () => {
           isOpen={showModal}
         />
       )}
-      <Btn onClick={() => setShowModal(!showModal)}>Add Coupon</Btn>
+      <div className="grid grid-cols-1 mb-4 lg:grid-cols-3 gap-6 ">
+        {coupons?.map((coupon) => (
+          <Coupon key={coupon._id} coupon={coupon} />
+        ))}
+      </div>
     </div>
   );
 };
