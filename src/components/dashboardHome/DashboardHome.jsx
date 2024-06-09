@@ -1,12 +1,10 @@
 import React from "react";
 import { MdAddModerator, MdAdminPanelSettings } from "react-icons/md";
 import useRole from "../../hooks/useRole";
-import useUserContext from "../../hooks/useUserContext";
 import Admin from "../admin/Admin";
 import Moderator from "../moderator/Moderator";
 
 const DashboardHome = () => {
-  const { user } = useUserContext();
   const role = useRole();
   return (
     <div>
