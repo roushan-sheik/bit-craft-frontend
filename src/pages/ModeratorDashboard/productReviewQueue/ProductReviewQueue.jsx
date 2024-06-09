@@ -8,11 +8,8 @@ import { toast, ToastContainer } from "react-toastify";
 import MySpinner from "../../../components/loadingSpinner/Spinner";
 import NoDataFound from "../../../components/not-found/NoDataFound";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useUserContext from "../../../hooks/useUserContext";
 
 const ProductReviewQueue = () => {
-  const { user } = useUserContext();
-
   const axiosSecure = useAxiosSecure();
 
   const {

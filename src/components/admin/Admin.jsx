@@ -15,8 +15,8 @@ const Admin = () => {
   });
   return (
     <div>
-      <div className="mt-6 flex gap-6">
-        <div className="p-4 bg_pri w-4/12 rounded-md flex items-center gap-6 text-white justify-center">
+      <div className="mt-6 flex lg:flex-row flex-col gap-6">
+        <div className="p-4 bg_pri  w-full lg:w-4/12 rounded-md flex items-center gap-6 text-white justify-center">
           <FaUsers className="text-2xl lg:text-4xl " />
           <div>
             <h1 className="text-white text-center lg:text-4xl text-2xl font-semibold">
@@ -27,7 +27,7 @@ const Admin = () => {
             </h1>
           </div>
         </div>
-        <div className="p-4 bg_sec w-4/12 rounded-md flex items-center gap-6 text-white justify-center">
+        <div className="p-4 bg_sec w-full lg:w-4/12 rounded-md flex items-center gap-6 text-white justify-center">
           <MdReviews className="text-2xl lg:text-4xl " />
 
           <div>
@@ -39,7 +39,7 @@ const Admin = () => {
             </h1>
           </div>
         </div>
-        <div className="p-4 bg-blue-gray-500 w-4/12 rounded-md flex items-center gap-6 text-white justify-center">
+        <div className="p-4 bg-blue-gray-500 w-full  lg:w-4/12 rounded-md flex items-center gap-6 text-white justify-center">
           <FaBoxesStacked className="text-2xl lg:text-4xl " />
 
           <div>

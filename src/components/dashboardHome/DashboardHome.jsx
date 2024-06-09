@@ -10,7 +10,7 @@ const DashboardHome = () => {
   const role = useRole();
   return (
     <div>
-      <div className="flex mt-8 items-center gap-1 text-2xl lg:text-4xl font-bold">
+      <div className="flex lg:mt-8 mt-16 items-center gap-1 text-2xl lg:text-4xl font-bold">
         {role === "Admin" && (
           <img
             className="h-[80px] w-[80px]"
