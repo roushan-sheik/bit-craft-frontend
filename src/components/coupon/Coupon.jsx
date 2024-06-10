@@ -2,7 +2,7 @@ import React from "react";
 import { MdDeleteForever, MdEditSquare } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-const Coupon = ({ coupon }) => {
+const Coupon = ({ coupon, deleteCoupon }) => {
   const { _id, description, code, discountAmount, expiryDate } = coupon;
   function handleDelete(id) {
     console.log("delete", id);
@@ -40,7 +40,7 @@ const Coupon = ({ coupon }) => {
         </Link>
 
         <div
-          onClick={() => handleDelete(_id)}
+          onClick={() => deleteCoupon(_id)}
           className="flex flex-1 mr-2 cursor-pointer items-center gap-1 text-red-500"
         >
           <MdDeleteForever className="lg:flex hidden" />

@@ -5,6 +5,7 @@ import Btn from "../../components/button/Btn";
 import Coupon from "../../components/coupon/Coupon";
 import MySpinner from "../../components/loadingSpinner/Spinner";
 import CouponModal from "../../components/shared/modal/CouponModal";
+import { axiosCommon } from "./../../hooks/useAxiosCommon";
 import { axiosSecure } from "./../../hooks/useAxiosSecure";
 
 const ManageCoupons = () => {
@@ -35,6 +36,21 @@ const ManageCoupons = () => {
     },
   });
   if (isLoading) return <MySpinner />;
+  async function deleteCoupon(id) {
+    try {
+      await axiosCommon.delete(`/coupon/delete/${id}`);
+      refetch();
+      toast.success("Deleted successfully", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    } catch (error) {
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    }
+  }
 
   return (
     <div>
@@ -55,7 +71,11 @@ const ManageCoupons = () => {
       )}
       <div className="grid grid-cols-1 mb-4 lg:grid-cols-3 gap-6 ">
         {coupons?.map((coupon) => (
-          <Coupon key={coupon._id} coupon={coupon} />
+          <Coupon
+            deleteCoupon={deleteCoupon}
+            key={coupon._id}
+            coupon={coupon}
+          />
         ))}
       </div>
     </div>
