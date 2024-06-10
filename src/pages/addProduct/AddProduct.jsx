@@ -30,7 +30,7 @@ const AddProduct = () => {
   function handleChange(e) {
     setProduct({ ...product, [e.target.name]: e.target.value });
   }
-  const route = "/my-products";
+  const route = "/dashboard/my-products";
 
   const currentDate = new Date().toLocaleDateString();
 
