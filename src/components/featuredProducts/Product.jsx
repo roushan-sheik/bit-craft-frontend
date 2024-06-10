@@ -6,6 +6,7 @@ import { FaBox, FaBoxOpen } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import useFeatured from "../../hooks/dataFetching/useFeatured";
 import useUserContext from "../../hooks/useUserContext";
 import useAxiosSecure from "./../../hooks/useAxiosSecure";
 
@@ -15,7 +16,7 @@ const Product = ({ product }) => {
   const axiosSecure = useAxiosSecure();
   const { _id, name, image, tags, title, user_email, vote } = product;
   // get vote ===========================================
-
+  const { refetch } = useFeatured();
   // handle vote click
   async function handleVoteClick() {
     try {
@@ -25,6 +26,7 @@ const Product = ({ product }) => {
         downVote: 0,
       };
       await axiosSecure.patch(`/update-vote/${_id}`, upVoteObj);
+      refetch();
       toast.success("Voted", {
         position: "top-right",
         autoClose: 3000,
