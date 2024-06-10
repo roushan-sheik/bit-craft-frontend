@@ -1,7 +1,7 @@
 import React from "react";
 import { FaBoxesStacked, FaUsers } from "react-icons/fa6";
 import { MdReviews } from "react-icons/md";
-import useStatistics from "../../hooks/dataFetching/useStatistics";
+import useStatistics from "../../hooks/dataFetching/useStatistics.jsx";
 import useUserContext from "../../hooks/useUserContext";
 import MySpinner from "../loadingSpinner/Spinner";
 import PiChart from "../pieChart/PieChart";

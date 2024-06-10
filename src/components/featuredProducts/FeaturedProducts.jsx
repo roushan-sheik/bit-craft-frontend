@@ -1,17 +1,17 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import useFeatured from "../../hooks/dataFetching/useFeatured";
+import { axiosCommon } from "../../hooks/useAxiosCommon";
 import MySpinner from "../loadingSpinner/Spinner";
 import Product from "./Product";
-const FeaturedProducts = () => {
-  const { products, isLoading } = useFeatured();
 
-  // const { data: products, isLoading } = useQuery({
-  //   queryKey: ["products"],
-  //   queryFn: async () => {
-  //     const { data } = await axiosCommon.get(`/products/featured`);
-  //     return data;
-  //   },
-  // });
+const FeaturedProducts = () => {
+  const { data: products, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/products/featured`);
+      return data;
+    },
+  });
   if (isLoading) return <MySpinner />;
 
   return (
