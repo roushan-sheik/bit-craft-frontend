@@ -28,7 +28,7 @@ const DesktopNav = () => {
       >
         Products
       </NavLink>
-      <NavLink
+      {/* <NavLink
         to="/news"
         className={({ isActive, isPending, isTransitioning }) =>
           [
@@ -51,7 +51,7 @@ const DesktopNav = () => {
         }
       >
         Community
-      </NavLink>
+      </NavLink> */}
     </div>
   );
 };
