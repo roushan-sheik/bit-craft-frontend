@@ -18,6 +18,7 @@ import Products from "../pages/products/Products";
 import Profile from "../pages/profile/Profile";
 import Register from "../pages/register/Register";
 import StatisticsPage from "../pages/statisticsPage/StatisticsPage";
+import UpdateCoupon from "../pages/updateCoupon/UpdateCoupon";
 import UpdateProduct from "../pages/updateProduct/UpdateProduct";
 import UpdateProfile from "./../pages/updateProfile/UpdateProfile";
 import homeLoader from "./loader";
@@ -121,6 +122,10 @@ const router = createBrowserRouter([
       {
         path: "manage-coupons",
         element: <ManageCoupons />,
+      },
+      {
+        path: "update-coupon",
+        element: <UpdateCoupon />,
       },
     ],
   },

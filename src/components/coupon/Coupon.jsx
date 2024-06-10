@@ -1,7 +1,12 @@
 import React from "react";
+import { MdDeleteForever, MdEditSquare } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Coupon = ({ coupon }) => {
-  const { description, code, discountAmount, expiryDate } = coupon;
+  const { _id, description, code, discountAmount, expiryDate } = coupon;
+  function handleDelete(id) {
+    console.log("delete", id);
+  }
   return (
     <div className="p-4 rounded-md bg-blue-gray-100">
       <div
@@ -15,7 +20,33 @@ const Coupon = ({ coupon }) => {
       <p>Discount: {discountAmount}%</p>
       <p>Expire Date: {expiryDate}</p>
       {/* icon box  */}
-      <div></div>
+      <div className="flex gap-6 items-center mt-6">
+        <Link
+          to={"/dashboard/update-coupon"}
+          state={{
+            _id,
+            description,
+            code,
+            discountAmount,
+            expiryDate,
+          }}
+        >
+          <div className="flex items-center gap-1">
+            <span className="lg:flex hidden">
+              <MdEditSquare />
+            </span>
+            <span>Edit</span>
+          </div>
+        </Link>
+
+        <div
+          onClick={() => handleDelete(_id)}
+          className="flex flex-1 mr-2 cursor-pointer items-center gap-1 text-red-500"
+        >
+          <MdDeleteForever className="lg:flex hidden" />
+          <span>Delete</span>
+        </div>
+      </div>
     </div>
   );
 };
