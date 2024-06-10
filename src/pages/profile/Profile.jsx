@@ -10,8 +10,8 @@ import useUserContext from "../../hooks/useUserContext";
 const Profile = () => {
   const { user } = useUserContext();
 
-  const [status] = useSubscribe();
-  console.log(status);
+  const data = useSubscribe();
+
   let amount = 200;
   return (
     <div className="max-w-6xl mx-auto ">
@@ -32,7 +32,7 @@ const Profile = () => {
             <span>Membership Status:</span>
           </div>
           <div className="">
-            {status ? (
+            {data?.status ? (
               <div className="flex items-center text-lg gap-1 text_brand_pri select-none">
                 <RiVerifiedBadgeFill />
                 <span>Verified</span>

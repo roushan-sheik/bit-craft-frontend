@@ -27,7 +27,7 @@ const UpdateProfile = () => {
       // 3. Save username and photo in firebase
       await updateUserProfile(name, image_url);
       setLoading(false);
-      navigate("/my-profile");
+      navigate("/dashboard/my-profile");
       toast.success("register Successful");
     } catch (err) {
       setLoading(false);

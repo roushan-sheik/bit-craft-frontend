@@ -68,7 +68,7 @@ function MobileSidebar() {
             route={"my-products"}
             icon={IoBagAddOutline}
           />
-          {(role === Admin || Moderator) && (
+          {(role === Admin || role === Moderator) && (
             <LinkRoute
               label={"Product Queue"}
               route={"product-review-queue"}
@@ -97,7 +97,7 @@ function MobileSidebar() {
               icon={FaIdCard}
             />
           )}
-          {role === ("Moderator" || "Admin") && (
+          {(role === Admin || role === Moderator) && (
             <LinkRoute
               label={"Reported Contents"}
               route={"reported-contents"}
