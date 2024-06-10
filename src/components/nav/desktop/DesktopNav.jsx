@@ -40,18 +40,6 @@ const DesktopNav = () => {
       >
         News
       </NavLink>
-      <NavLink
-        to="/community"
-        className={({ isActive, isPending, isTransitioning }) =>
-          [
-            isPending ? "pending" : "",
-            isActive ? "text_brand_sec font-bold" : "",
-            isTransitioning ? "transitioning" : "",
-          ].join(" ")
-        }
-      >
-        Community
-      </NavLink>
     </div>
   );
 };

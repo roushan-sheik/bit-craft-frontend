@@ -3,7 +3,7 @@ import axios from "axios";
 import React from "react";
 import MySpinner from "../../components/loadingSpinner/Spinner";
 
-const News = () => {
+const Community                                = () => {
   const { data: news, isLoading } = useQuery({
     queryKey: ["news"],
     queryFn: async () => {
@@ -16,13 +16,12 @@ const News = () => {
   return (
     <div className="main_">
       <div>
-        <h1 className="text-2xl lg:text-4xl font-semibold my-4 text-center">
+        <h1 className="text-2xl mb-8 lg:text-4xl font-semibold my-4 text-center">
           Latest News
         </h1>
       </div>
       <div className="grid grid-cols-1  gap-6">
         {news?.map((item) => {
-          console.log(item);
           const {
             author_name,
             author_email,
@@ -54,4 +53,4 @@ const News = () => {
   );
 };
 
-export default News;
+export default Community;

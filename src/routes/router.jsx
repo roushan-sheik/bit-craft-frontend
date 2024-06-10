@@ -3,7 +3,6 @@ import DashboardHome from "../components/dashboardHome/DashboardHome";
 import Dashboard from "../layout/Dashboard";
 import Root from "../layout/Root";
 import AddProduct from "../pages/addProduct/AddProduct";
-import Community from "../pages/community/Community";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
@@ -56,10 +55,7 @@ const router = createBrowserRouter([
         path: "/news",
         element: <News />,
       },
-      {
-        path: "/community",
-        element: <Community />,
-      },
+
       {
         path: "/login",
         element: <Login />,
