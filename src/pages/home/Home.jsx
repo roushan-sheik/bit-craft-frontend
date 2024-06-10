@@ -1,4 +1,5 @@
 import React from "react";
+import CouponAdvertisement from "../../components/couponAdvertisement/CouponAdvertisement";
 import FeaturedProducts from "../../components/featuredProducts/FeaturedProducts";
 import BannerSlider from "../../components/slider/BannerSlider";
 import Title from "../../components/title/Title";
@@ -23,6 +24,8 @@ const Home = () => {
         <FeaturedProducts />
         {/* Trending Products Section */}
         <TrendingProducts />
+        {/* Coupon Advertisement  */}
+        <CouponAdvertisement />
       </section>
     </main>
   );

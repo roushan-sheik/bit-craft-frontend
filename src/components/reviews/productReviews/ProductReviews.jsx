@@ -4,8 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Title from "../../title/Title";
 // Import Swiper styles
 import { Rating } from "@material-tailwind/react";
-import "swiper/css";
-import "swiper/css/pagination";
+
 // import required modules
 import PropTypes from "prop-types";
 import { Pagination } from "swiper/modules";
