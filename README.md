@@ -37,6 +37,9 @@ subscriptions.
 
 - React
 - Tailwind
+- Express Js
+- JWT Json Web Token
+- MongoDB
 - Material Tailwind (component library)
 - React router dom
 - headlessui/react
